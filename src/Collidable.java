@@ -1,4 +1,6 @@
 
-public class Collidable {
-
+public interface Collidable {
+	
+	boolean collided(Collidable c);
+	
 }
