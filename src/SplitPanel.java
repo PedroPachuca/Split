@@ -7,15 +7,14 @@ import javax.swing.JPanel;
 public class SplitPanel extends JPanel{
 
 		// what private data is needed?
-		final int width, length;
+		final Vector dimensions;
 		private Color backgroundColor;
 		private Ball ball;
 		//private Polygon map;
 		private ArrayList<Divider> dividers = new ArrayList<Divider>();
 
 		public SplitPanel(int width, int length) {
-			this.width = width;
-			this.length = length;
+			dimensions = new Vector(width, length);
 			
 			//TODO Parth make background colors
 			//backgroundColor = new Color();
@@ -33,7 +32,6 @@ public class SplitPanel extends JPanel{
 		}
 
 		private void initDividers() {
-			// TODO Auto-generated method stub
 			
 		}
 

@@ -1,5 +1,5 @@
 
-public class Wall{
+public class Wall implements Collidable{
 
 	private int x1,x2,y1,y2;
 	
@@ -27,12 +27,10 @@ public class Wall{
 	
 	}
 
-	/*@Override
+	@Override
 	public boolean collided(Collidable c) {
 		// TODO Auto-generated method stub
 		return false;
-	}*/
-	
-	
+	}	
 
 }
