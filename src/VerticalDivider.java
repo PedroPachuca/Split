@@ -17,5 +17,10 @@ public class VerticalDivider extends Divider {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	protected void draw() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

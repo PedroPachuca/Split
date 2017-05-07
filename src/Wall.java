@@ -31,6 +31,10 @@ public class Wall implements Collidable{
 	public boolean collided(Collidable c) {
 		// TODO Auto-generated method stub
 		return false;
-	}	
+	}
+
+	public void draw() {
+		
+	}
 
 }

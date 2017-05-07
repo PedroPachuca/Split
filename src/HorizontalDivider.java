@@ -18,5 +18,11 @@ public class HorizontalDivider extends Divider{
 		
 	}
 
+	@Override
+	protected void draw() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

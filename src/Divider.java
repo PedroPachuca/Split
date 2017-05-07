@@ -14,5 +14,6 @@ public abstract class Divider implements Collidable {
 	
 	protected abstract void grow();
 	
+	protected abstract void draw();
 
 }
