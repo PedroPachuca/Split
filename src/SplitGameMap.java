@@ -9,20 +9,35 @@ import javax.imageio.ImageIO;
 
 public class SplitGameMap extends GameMap{
 
-	private Color backgroundColor;
 	private Ball ball;
 	private Vector dimensions;
 	private ArrayList<Divider> dividers = new ArrayList<Divider>();
 	private ArrayList<Wall> walls = new ArrayList<Wall>();
-	
+	private int cushion = 20;
 	public SplitGameMap(Vector dims) {
 		dimensions = dims;
 		clearAndinitDividers();
 		createBall();
+		createWalls();
+	}
+	private void createWalls() {
+		Wall topWall = new Wall(cushion, cushion, dimensions.getX() - cushion * 2, cushion);
+		Wall bottomWall = new Wall(cushion, dimensions.getY() / 2 + cushion * 4, dimensions.getX() - cushion * 2, cushion);
+		Wall leftWall = new Wall(cushion, cushion, cushion, dimensions.getY() / 2 + cushion * 4);
+		Wall rightWall = new Wall(dimensions.getX() - cushion * 2, cushion, cushion, dimensions.getY() / 2 + cushion * 4);
+		walls.add(rightWall);
+		walls.add(leftWall);
+		walls.add(bottomWall);
+		walls.add(topWall);
+		
 	}
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
+		ball.move();
+		for(Wall w: walls) {
+			w.collided(ball);
+		}
 		
 	}
 
@@ -33,7 +48,7 @@ public class SplitGameMap extends GameMap{
 			div.draw();
 		}
 		for(Wall w: walls) {
-			w.draw();
+			w.draw(g);
 		}
 	}
 
@@ -49,8 +64,8 @@ public class SplitGameMap extends GameMap{
 	
 	private void createBall() {
 		
-		final int ballRadius = 2;
-		ball = new Ball(0, 0, ballRadius);
+		final int ballRadius = 100;
+		ball = new Ball(dimensions.getX() / 2, dimensions.getY() / 2, ballRadius);
 		
 	}
 }

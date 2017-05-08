@@ -1,13 +1,15 @@
+import java.awt.Graphics;
 
 public class Wall implements Collidable{
 
 	private int x1,x2,y1,y2;
-	
-	private Wall(int x1,int x2,int y1,int y2){
-		this.x1=x1;
-		this.x2=x2;
-		this.y1=y1;
-		this.y2=y2;
+	private int x, y, width, length;
+	public Wall(int x, int y, int width, int length){
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.length = length;
+		
 	}
 	
 	public int getX1(){
@@ -27,14 +29,32 @@ public class Wall implements Collidable{
 	
 	}
 
-	@Override
-	public boolean collided(Collidable c) {
-		// TODO Auto-generated method stub
-		return false;
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+}
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getLengtht() {
+		return length;
 	}
 
-	public void draw() {
-		
+	public void draw(Graphics g){
+		//g.drawLine(x1,  x2,  y1,  y2);
+		g.fillRect(x,  y,  width,  length);
+		System.out.println("Wall drawn");
+	}
+
+	@Override
+	public boolean collided(Ball b) {
+		//if(b.getX() <)
+		return false;
 	}
 
 }

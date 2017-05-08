@@ -46,7 +46,8 @@ public class Ball {
 	}
 	
 	public void draw(Graphics g){
-		g.drawImage(img, x, y, radius, radius, null);
+		g.drawImage(img, x, y, radius / 2, radius / 2, null);
+		System.out.println("Ball drawn");
 	}
 	
 	public void bounce(){
@@ -57,5 +58,8 @@ public class Ball {
 		//int x = (int)(Math.Random()*5)
 		
 		return x;
+	}
+	public void move() {
+		//TODO use getRandomXMovement() to actually move
 	}
 }

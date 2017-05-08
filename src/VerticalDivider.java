@@ -7,7 +7,7 @@ public class VerticalDivider extends Divider {
 		
 	}
 	@Override
-	public boolean collided(Collidable c) {
+	public boolean collided(Ball b) {
 		// TODO Auto-generated method stub
 		return false;
 	}
