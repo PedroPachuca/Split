@@ -51,10 +51,13 @@ public class Wall implements Collidable{
 		System.out.println("Wall drawn");
 	}
 
-	@Override
 	public boolean collided(Ball b) {
-		//if(b.getX() <)
+		if(b.getX() == x && b.getY() == y){
+			b.bounce();
+			return true;
+		}
 		return false;
+		
 	}
 
 }

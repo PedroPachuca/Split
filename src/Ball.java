@@ -11,6 +11,7 @@ public class Ball {
 	private BufferedImage img;
 	private int a = getRandomXMovement();
 	private int b = getRandomYMovement();
+	private int c = 0;
 	
 	public Ball(int x, int y, int radius){
 		this.setX(x);
@@ -61,7 +62,11 @@ public class Ball {
 	}
 	
 	public void bounce(){
-		
+		if(c*2==0)
+			b*=-1;
+		else
+			a*=-1;
+		c++;
 	}
 	
 	public int getRandomXMovement(){
@@ -76,5 +81,9 @@ public class Ball {
 	public void move() {
 		x = a + this.x;
 		y = b + this.y;
+	}
+	
+	public void die(){
+		
 	}
 }

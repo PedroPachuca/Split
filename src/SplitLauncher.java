@@ -15,6 +15,7 @@ public class SplitLauncher {
 	}
 
 	private void startGame() {
+		System.setProperty("sun.java2d.opengl", "true");
 		JFrame splitFrame = new JFrame("SPLIT!");
 		splitFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		SplitPanel splitPanel= new SplitPanel(dimensions.getX(), dimensions.getY());
