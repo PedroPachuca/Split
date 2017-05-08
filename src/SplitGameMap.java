@@ -38,14 +38,16 @@ public class SplitGameMap extends GameMap{
 		for(Wall w: walls) {
 			w.collided(ball);
 		}
-		
+		for(Divider div: dividers) {
+			div.grow();
+		}
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		ball.draw(g);
 		for(Divider div: dividers) {
-			div.draw();
+			div.draw(g);
 		}
 		for(Wall w: walls) {
 			w.draw(g);

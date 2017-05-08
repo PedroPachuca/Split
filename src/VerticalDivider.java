@@ -1,10 +1,12 @@
+import java.awt.Graphics;
+
 
 public class VerticalDivider extends Divider {
 
 	
 	public VerticalDivider(int x, int y) {
 		location = new Vector(x, y);
-		
+		length = 0;
 	}
 	@Override
 	public boolean collided(Ball b) {
@@ -14,12 +16,12 @@ public class VerticalDivider extends Divider {
 
 	@Override
 	protected void grow() {
-		// TODO Auto-generated method stub
+		length += SPEED;
 		
 	}
 	@Override
-	protected void draw() {
-		// TODO Auto-generated method stub
+	protected void draw(Graphics g) {
+		g.fillRect(location.getX(), location.getY(), length, DIMS);
 		
 	}
 
