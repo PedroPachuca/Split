@@ -51,7 +51,7 @@ public class SplitPanel extends JPanel{
 		}
 
 		private void startTicks() {
-			t = new Timer(1000, new ActionListener() {// fires off every 10 ms
+			t = new Timer(50, new ActionListener() {// fires off every 10 ms
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					gm.tick();// I tell the GameMap to tick... do what

@@ -9,6 +9,8 @@ public class Ball {
 	
 	private int x, y, radius;
 	private BufferedImage img;
+	private int a = getRandomXMovement();
+	private int b = getRandomYMovement();
 	
 	public Ball(int x, int y, int radius){
 		this.setX(x);
@@ -37,6 +39,14 @@ public class Ball {
 		this.y = y;
 	}
 	
+	public void setA(){
+		a = getRandomXMovement();
+	}
+	
+	public void setB(){
+		b = getRandomYMovement();
+	}
+	
 	public int getX(){
 		return this.x;
 	}
@@ -55,11 +65,16 @@ public class Ball {
 	}
 	
 	public int getRandomXMovement(){
-		//int x = (int)(Math.Random()*5)
-		
+		int x = (int)(Math.random()*5)+1;		
 		return x;
 	}
+	public int getRandomYMovement(){
+		int y = (int)(Math.random()*5)+1;		
+		return y;
+	}
+	
 	public void move() {
-		//TODO use getRandomXMovement() to actually move
+		x = a + this.x;
+		y = b + this.y;
 	}
 }

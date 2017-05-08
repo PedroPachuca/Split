@@ -1,4 +1,12 @@
-/SplitPanel$1.class
+/Ball.class
+/Collidable.class
+/Divider.class
 /GameMap.class
+/HorizontalDivider.class
 /SplitGameMap.class
-/bg.jpg
+/SplitLauncher.class
+/SplitPanel$1.class
+/SplitPanel.class
+/Vector.class
+/VerticalDivider.class
+/Wall.class
