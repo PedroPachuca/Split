@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
 public class SplitPanel extends JPanel{
 
 		// what private data is needed?
