@@ -1,6 +1,6 @@
 
 public interface Collidable {
 	
-	boolean collided(Ball b);
+	void collided(Ball b);
 	
 }

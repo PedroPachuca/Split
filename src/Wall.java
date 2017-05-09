@@ -1,34 +1,21 @@
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class Wall implements Collidable{
 
-	private int x1,x2,y1,y2;
 	private int x, y, width, length;
+	private Rectangle boundingRect;
 	public Wall(int x, int y, int width, int length){
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.length = length;
-		
+		this.boundingRect = new Rectangle(x, y, width, length);
 	}
 	
-	public int getX1(){
-		return x1;
-		
+	public Rectangle getBoundingRect() {
+		return boundingRect;
 	}
-	public int getX2(){
-		return x2;
-		
-	}
-	public int getY1(){
-		return y1;
-	
-	}
-	public int getY2(){
-		return y2;
-	
-	}
-
 	
 	public int getX() {
 		return x;
@@ -41,23 +28,20 @@ public class Wall implements Collidable{
 		return width;
 	}
 	
-	public int getLengtht() {
+	public int getLength() {
 		return length;
 	}
 
 	public void draw(Graphics g){
-		//g.drawLine(x1,  x2,  y1,  y2);
 		g.fillRect(x,  y,  width,  length);
-		System.out.println("Wall drawn");
 	}
 
-	public boolean collided(Ball b) {
-		if(b.getX() == x && b.getY() == y){
+	public void collided(Ball b) {
+		if(getBoundingRect().intersects(b.getBoundingRect())) {
 			b.bounce();
-			return true;
+			//WHY THIS NO WORK
 		}
-		return false;
-		
+		System.out.println("checked if collided with wall");
 	}
 
 }

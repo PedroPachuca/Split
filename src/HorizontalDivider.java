@@ -10,9 +10,8 @@ public class HorizontalDivider extends Divider{
 	}
 	
 	@Override
-	public boolean collided(Ball b) {
+	public void collided(Ball b) {
 		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class SplitGameMap extends GameMap{
 	private int cushion = 20;
 	public SplitGameMap(Vector dims) {
 		dimensions = dims;
-		clearAndinitDividers();
+		//clearAndinitDividers();
 		createBall();
 		createWalls();
 	}
@@ -67,7 +67,7 @@ public class SplitGameMap extends GameMap{
 	private void createBall() {
 		
 		final int ballRadius = 100;
-		ball = new Ball(dimensions.getX() / 2, dimensions.getY() / 2, ballRadius);
+		ball = new Ball(dimensions.getX() / 3, dimensions.getY() / 3, ballRadius);
 		
 	}
 }

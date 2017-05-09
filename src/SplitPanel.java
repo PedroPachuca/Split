@@ -26,7 +26,7 @@ public class SplitPanel extends JPanel{
 			openBackgroundImg();
 			
 			//TODO Parth make background colors
-			Color backgroundColor = Color.BLUE;
+			Color backgroundColor = Color.GREEN;
 			this.setBackground(backgroundColor);
 			
 			
@@ -35,10 +35,10 @@ public class SplitPanel extends JPanel{
 
 		private void openBackgroundImg() {
 			try {
-				img = ImageIO.read(new File("bg.jpg"));
+				img = ImageIO.read(new File("background.jpg"));
 			}
 			catch(IOException e) {
-				System.out.println("Unable to instantiate bg");
+				System.out.println("Unable to instantiate background");
 			}
 			
 		}
