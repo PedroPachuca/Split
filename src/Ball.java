@@ -1,5 +1,6 @@
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -7,18 +8,20 @@ import javax.imageio.ImageIO;
 
 public class Ball {
 	
-	private int x, y, radius;
+	private int x, y, radius, params;
 	private BufferedImage img;
 	private int a = getRandomXMovement();
 	private int b = getRandomYMovement();
 	private int c = 0;
+	private Rectangle boundingRect;
 	
 	public Ball(int x, int y, int radius){
 		this.setX(x);
 		this.setY(y);
 		this.radius=radius;
 		getImg();
-		
+		params = radius / 2;
+		boundingRect = new Rectangle(x, y, params, params);
 	}
 	
 	private void getImg() {
@@ -31,7 +34,13 @@ public class Ball {
 		}
 		
 	}
-
+	public int getSquareParams() {
+		return params;
+	}
+	public Rectangle getBoundingRect() {
+		return boundingRect;
+	}
+	
 	public void setX(int x){
 		this.x = x;
 	}
@@ -58,7 +67,6 @@ public class Ball {
 	
 	public void draw(Graphics g){
 		g.drawImage(img, x, y, radius / 2, radius / 2, null);
-		System.out.println("Ball drawn");
 	}
 	
 	public void bounce(){
@@ -67,6 +75,7 @@ public class Ball {
 		else
 			a*=-1;
 		c++;
+		System.out.println("ball bounced");
 	}
 	
 	public int getRandomXMovement(){
