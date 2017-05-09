@@ -39,6 +39,7 @@ public class Wall implements Collidable{
 	public void collided(Ball b) {
 		if(getBoundingRect().intersects(b.getBoundingRect())) {
 			b.bounce();
+			//WHY THIS NO WORK
 		}
 		System.out.println("checked if collided with wall");
 	}
