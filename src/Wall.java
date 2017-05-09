@@ -41,7 +41,7 @@ public class Wall implements Collidable{
 			b.bounce();
 			//WHY THIS NO WORK
 		}
-		System.out.println("checked if collided with wall");
+		//System.out.println("checked if collided with wall");
 	}
 
 }

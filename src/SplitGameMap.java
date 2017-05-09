@@ -11,9 +11,9 @@ public class SplitGameMap extends GameMap{
 
 	private Ball ball;
 	private Vector dimensions;
+	private Polygon  polygon = new Polygon();
 	private ArrayList<Divider> dividers = new ArrayList<Divider>();
-	private ArrayList<Wall> walls = new ArrayList<Wall>();
-	private int cushion = 20;
+	private int cushion = 10;
 	public SplitGameMap(Vector dims) {
 		dimensions = dims;
 		//clearAndinitDividers();
@@ -21,21 +21,19 @@ public class SplitGameMap extends GameMap{
 		createWalls();
 	}
 	private void createWalls() {
-		Wall topWall = new Wall(cushion, cushion, dimensions.getX() - cushion * 2, cushion);
-		Wall bottomWall = new Wall(cushion, dimensions.getY() / 2 + cushion * 4, dimensions.getX() - cushion * 2, cushion);
-		Wall leftWall = new Wall(cushion, cushion, cushion, dimensions.getY() / 2 + cushion * 4);
-		Wall rightWall = new Wall(dimensions.getX() - cushion * 2, cushion, cushion, dimensions.getY() / 2 + cushion * 4);
-		walls.add(rightWall);
-		walls.add(leftWall);
-		walls.add(bottomWall);
-		walls.add(topWall);
+
+		polygon.add(new Wall(cushion*2,cushion*2,cushion,dimensions.getY()-150-2*cushion));
+        polygon.add(new Wall(cushion*2,dimensions.getY()-150-cushion,dimensions.getX()-4*cushion,cushion));
+        polygon.add(new Wall(cushion*2,cushion*2,dimensions.getX()-4*cushion,cushion));
+        polygon.add(new Wall(dimensions.getX()-cushion*3,cushion*2,cushion,dimensions.getY()-150-2*cushion));
+
 		
 	}
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
 		ball.move();
-		for(Wall w: walls) {
+		for(Wall w: polygon.walls()) {
 			w.collided(ball);
 		}
 		for(Divider div: dividers) {
@@ -49,7 +47,7 @@ public class SplitGameMap extends GameMap{
 		for(Divider div: dividers) {
 			div.draw(g);
 		}
-		for(Wall w: walls) {
+		for(Wall w: polygon.walls()) {
 			w.draw(g);
 		}
 	}
