@@ -3,6 +3,7 @@
 /Divider.class
 /GameMap.class
 /HorizontalDivider.class
+/Polygon.class
 /SplitGameMap.class
 /SplitLauncher.class
 /SplitPanel$1.class
@@ -10,4 +11,3 @@
 /Vector.class
 /VerticalDivider.class
 /Wall.class
-/background.jpg
