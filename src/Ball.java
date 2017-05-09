@@ -1,4 +1,3 @@
-
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -83,7 +82,7 @@ public class Ball {
 		y = b + this.y;
 	}
 	
-	public void die(){
-		
+	public void die(Graphics g){
+	
 	}
 }
