@@ -36,6 +36,10 @@ public class Ball {
 	public int getSquareParams() {
 		return params;
 	}
+	
+	private void updateRect() {
+		this.boundingRect = new Rectangle(x, y, params, params);
+	}
 	public Rectangle getBoundingRect() {
 		return boundingRect;
 	}
@@ -65,7 +69,8 @@ public class Ball {
 	}
 	
 	public void draw(Graphics g){
-		g.drawImage(img, x, y, radius / 2, radius / 2, null);
+		this.updateRect();
+		g.drawImage(img, x, y, params, params, null);
 	}
 	
 	public void bounce(){

@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 
 public class HorizontalDivider extends Divider{
@@ -7,11 +8,14 @@ public class HorizontalDivider extends Divider{
 	public HorizontalDivider(int x, int y) {
 		location = new Vector(x, y);
 		length = 0;
+		boundingRect = new Rectangle(x, y, DIMS, length);
 	}
 	
 	@Override
 	public void collided(Ball b) {
-		// TODO Auto-generated method stub
+		if(getBoundingRect().intersects(b.getBoundingRect())) {
+			b.bounce();
+		}
 	}
 
 	@Override
@@ -21,7 +25,13 @@ public class HorizontalDivider extends Divider{
 
 	@Override
 	protected void draw(Graphics g) {
+		this.updateRect();
 		g.fillRect(location.getX(), location.getY(), DIMS, length);
+		
+	}
+
+	protected void updateRect() {
+		this.boundingRect = new Rectangle(location.getX(), location.getY(), DIMS, length);
 		
 	}
 
