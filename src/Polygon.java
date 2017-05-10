@@ -53,12 +53,33 @@ public class Polygon {
         
     }
     
-    public void split(int x1,int y1,int x2,int y2){
+    public void split(int x1,int y1,int x2,int y2, int ballX1, int ballX2){
+    	Wall wall1 = null;
+    	Wall wall2 = null;
     	Polygon p1=new Polygon();
     	Polygon p2=new Polygon();
     	for(Wall wall: walls){
+    		if(wall.inside(x1, y1))
+    			wall1=wall;
+    		else if(wall.inside(x2, y2))
+    			wall2=wall;
+
+    	}
+    	if(wall1==null||wall2==null)
+    		return;
+    	if(x1==x2){
     		
     	}
+    	else if(y1==y2){
+    		
+    	}
+    	else if((x1>x2&&y1>y2)||(x2>x1&&y2>y1)){
+    		
+    	}
+    	else{
+    		
+    	}
+    	
     }
     
     public void expand(){

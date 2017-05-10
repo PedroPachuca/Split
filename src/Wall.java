@@ -40,4 +40,10 @@ public class Wall implements Collidable{
 			b.bounce();
 		}
 	}
+	
+	public boolean inside(int x,int y){
+		if(x>=this.x&&x<this.x+width&&y>=this.y&&y<this.y+length)
+			return false;
+		return false;
+	}
 }
