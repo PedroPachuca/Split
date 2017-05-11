@@ -16,7 +16,6 @@ public class Ball {
 	private BufferedImage img;
 	private int a = getRandomXMovement()*-1;
 	private int b = getRandomYMovement()*-1;
-	private int c = 0;
 	private Rectangle boundingRect;
 	
 	public Ball(int x, int y, int radius){
@@ -80,12 +79,6 @@ public class Ball {
 	
 	public void bounce(){
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		//ArrayList<Wall> w = new ArrayList<>();
-		
-//		new Wall(cushion*2,cushion*2,cushion,dimensions.getY()-150-2*cushion);
-//      new Wall(cushion*2,dimensions.getY()-150-cushion,dimensions.getX()-4*cushion,cushion);
-//      new Wall(cushion*2,cushion*2,dimensions.getX()-4*cushion,cushion));
-//      new Wall(dimensions.getX()-cushion*3,cushion*2,cushion,dimensions.getY()-150-2*cushion);
 		
 		if((this.boundingRect.getMinX()>20) && (this.boundingRect.getMinX()<30)){ //left wall
 			a*=-1;
