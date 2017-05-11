@@ -1,8 +1,13 @@
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.List;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 
 public class Ball {
@@ -74,11 +79,23 @@ public class Ball {
 	}
 	
 	public void bounce(){
-		if(c*2==0)
-			b*=-1;
-		else
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//ArrayList<Wall> w = new ArrayList<>();
+		
+		if((x<200 && x>0) || (x<900 && x>(screenSize.getWidth()-200))){
 			a*=-1;
-		c++;
+		}
+		else{
+			b*=-1;
+		}
+		move();
+		move();
+		
+//		if(c*2==0)
+//			b*=-1;
+//		else
+//			a*=-1;
+//		c++;
 		System.out.println("ball bounced");
 	}
 	

@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.Timer;
 
 public class SplitPanel extends JPanel{
@@ -18,11 +19,19 @@ public class SplitPanel extends JPanel{
 		SplitGameMap gm;
 		private Timer t;
 		BufferedImage img;
+		private int level;
+		private int areaAvailable;
+		private JProgressBar progressBar;
+		private int areaCutOff;
 		//private Polygon map;
 
 		public SplitPanel(int width, int length) {
 			dimensions = new Vector(width, length);
 			openBackgroundImg();
+			progressBar = new JProgressBar();
+			level=1;
+			areaAvailable = length * width;
+			
 			
 			//TODO Parth make background colors
 			Color backgroundColor = Color.GREEN;
@@ -39,6 +48,10 @@ public class SplitPanel extends JPanel{
 			catch(IOException e) {
 				System.out.println("Unable to instantiate background");
 			}
+			
+		}
+		
+		private void setUpProgressBar(){
 			
 		}
 
