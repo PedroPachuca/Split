@@ -19,6 +19,7 @@ public class SplitGameMap extends GameMap{
 		//clearAndinitDividers();
 		createBall();
 		createWalls();
+		System.out.println(polygon.inside(769, 439));
 	}
 	private void createWalls() {
 

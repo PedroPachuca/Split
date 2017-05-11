@@ -52,6 +52,18 @@ public class Polygon {
         }
         
     }
+    
+    public void split(int x1,int y1,int x2,int y2){
+    	Polygon p1=new Polygon();
+    	Polygon p2=new Polygon();
+    	for(Wall wall: walls){
+    		
+    	}
+    }
+    
+    public void expand(){
+    	
+    }
 
 
 }
