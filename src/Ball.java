@@ -80,9 +80,9 @@ public class Ball {
 	
 	public void bounce(){
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		ArrayList<Wall> w = new ArrayList<>();
+		//ArrayList<Wall> w = new ArrayList<>();
 		
-		if((x<200 && x>0) || (x<screenSize.getWidth() && x>(screenSize.getWidth()-200))){
+		if((x<200 && x>0) || (x<900 && x>(screenSize.getWidth()-200))){
 			a*=-1;
 		}
 		else{
