@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,19 +39,19 @@ public class SplitPanel extends JPanel{
 
 		public SplitPanel(int width, int length) {
 			this.setLayout(new BorderLayout());
+			
 			dimensions = new Vector(width, length);
 			openBackgroundImg();
 			progressBar = new JProgressBar();
-			level=1;
-			areaAvailable = length * width;
-			
-			
+			level = 1;
+			areaAvailable = width * length;
+			setUpProgressBar(width, length);
+			areaCutOff = 5;
 			//TODO Parth make background colors
 			Color backgroundColor = Color.GREEN;
 			this.setBackground(backgroundColor);
 			
-			
-			beginGame();
+			beginGame();			
 		}
 
 		private void openBackgroundImg() {
@@ -63,8 +64,24 @@ public class SplitPanel extends JPanel{
 			
 		}
 		
-		private void setUpProgressBar(){
+		private void setUpProgressBar(int width, int length) {			
+			JPanel barPanel = new JPanel();
+			barPanel.setLayout(new GridLayout());
+			barPanel.setPreferredSize(new Dimension(100, 20));
 			
+			progressBar.setMaximum(areaAvailable / 2);
+			progressBar.setMinimum(0);
+			progressBar.setOpaque(true);
+			progressBar.setIndeterminate(true);
+			progressBar.setBackground(Color.blue);
+			progressBar.setForeground(Color.GREEN);
+			progressBar.setVisible(true);
+			barPanel.add(progressBar);
+			this.add(barPanel,BorderLayout.NORTH);
+		}
+		
+		private void updateBar(Graphics g) {
+			progressBar.setValue(areaCutOff);
 		}
 
 		private void beginGame() {
@@ -201,6 +218,7 @@ public class SplitPanel extends JPanel{
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			
+			updateBar(g);
 			g.drawImage(img, 0, 0, dimensions.getX(), dimensions.getY(), null);
 			gm.draw(g);
 		}
