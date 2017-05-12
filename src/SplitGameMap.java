@@ -29,6 +29,7 @@ public class SplitGameMap extends GameMap{
 
 		
 	}
+	
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub

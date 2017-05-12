@@ -1,17 +1,21 @@
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.List;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 
 public class Ball {
 	
 	private int x, y, radius, params;
 	private BufferedImage img;
-	private int a = getRandomXMovement();
-	private int b = getRandomYMovement();
-	private int c = 0;
+	private int a = getRandomXMovement()*-1;
+	private int b = getRandomYMovement()*-1;
 	private Rectangle boundingRect;
 	
 	public Ball(int x, int y, int radius){
@@ -26,7 +30,7 @@ public class Ball {
 	private void getImg() {
 		
 		try {
-			img = ImageIO.read(new File("ball.png"));
+			img = ImageIO.read(new File("src/ball.png"));
 		}
 		catch(IOException e) {
 			System.out.println("Unable to instantiate image");
@@ -74,11 +78,24 @@ public class Ball {
 	}
 	
 	public void bounce(){
-		if(c*2==0)
-			b*=-1;
-		else
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		if((this.boundingRect.getMinX()>20) && (this.boundingRect.getMinX()<30)){ //left wall
 			a*=-1;
-		c++;
+		}
+		else if((this.boundingRect.getMaxY()>(600-150-10)) && (this.boundingRect.getMaxY()<(600))){ //bottom wall
+			b*=-1;
+		}
+		else if(this.boundingRect.getMinY()>20 && this.boundingRect.getMinY()<30){//top wall
+			b*=-1;
+		}
+		else if(this.boundingRect.getMaxX()>(800-30) && this.boundingRect.getMaxX()<(800)){//right wall
+			a*=-1;
+		}
+
+		move();
+		move();
+		
 		System.out.println("ball bounced");
 	}
 	
@@ -92,8 +109,8 @@ public class Ball {
 	}
 	
 	public void move() {
-		x = a + this.x;
-		y = b + this.y;
+		this.x+=a;
+		this.y+=b;
 	}
 	
 	public void die(Graphics g){
