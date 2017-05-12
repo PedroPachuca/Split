@@ -19,7 +19,7 @@ public class SplitGameMap extends GameMap{
 		//clearAndinitDividers();
 		createBall();
 		createWalls();
-		System.out.println(polygon.inside(769, 439));
+		//System.out.println(polygon.inside(769, 439));
 	}
 	private void createWalls() {
 
@@ -27,7 +27,8 @@ public class SplitGameMap extends GameMap{
         polygon.add(new Wall(cushion*2,dimensions.getY()-150-cushion,dimensions.getX()-4*cushion,cushion));
         polygon.add(new Wall(cushion*2,cushion*2,dimensions.getX()-4*cushion,cushion));
         polygon.add(new Wall(dimensions.getX()-cushion*3,cushion*2,cushion,dimensions.getY()-150-2*cushion));
-
+        polygon=polygon.split(500,cushion*2+3,500,cushion*2+dimensions.getY()-150-2*cushion-3,700,300,new Wall(500
+        		,cushion*2,cushion,dimensions.getY()-150-2*cushion),null);
 		
 	}
 	@Override
