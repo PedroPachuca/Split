@@ -30,7 +30,7 @@ public class Ball {
 	private void getImg() {
 		
 		try {
-			img = ImageIO.read(new File("ball.png"));
+			img = ImageIO.read(new File("src/ball.png"));
 		}
 		catch(IOException e) {
 			System.out.println("Unable to instantiate image");
