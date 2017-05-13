@@ -1,11 +1,6 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
+import java.awt.Graphics;
+import java.util.ArrayList;
 
 public class SplitGameMap extends GameMap{
 
@@ -26,8 +21,8 @@ public class SplitGameMap extends GameMap{
         polygon.add(new Wall(cushion*2,dimensions.getY()-150-cushion,dimensions.getX()-4*cushion,cushion));
         polygon.add(new Wall(cushion*2,cushion*2,dimensions.getX()-4*cushion,cushion));
         polygon.add(new Wall(dimensions.getX()-cushion*3,cushion*2,cushion,dimensions.getY()-150-2*cushion));
-        /*polygon=polygon.split(500,cushion*2+3,500,cushion*2+dimensions.getY()-150-2*cushion-3,490,300,new Wall(500
-        		,cushion*2,cushion,dimensions.getY()-150-2*cushion),null);*/
+        //polygon=polygon.split(500,cushion*2+3,500,cushion*2+dimensions.getY()-150-2*cushion-3,490,300,new Wall(500
+        //		,cushion*2,cushion,dimensions.getY()-150-2*cushion),null);
 		
 	}
 	

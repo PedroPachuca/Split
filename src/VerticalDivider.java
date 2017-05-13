@@ -21,8 +21,10 @@ public class VerticalDivider extends Divider {
 
 	@Override
 	protected void grow() {
+		if(Polygon.inside(location.getX(), location.getY())) {
 		length += SPEED;
 		location.setY(center.getY() - length / 2);
+		}
 	}
 	@Override
 	protected void draw(Graphics g) {

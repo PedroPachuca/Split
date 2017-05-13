@@ -22,11 +22,14 @@ public class HorizontalDivider extends Divider{
 
 	@Override
 	protected void grow() {
+		if(Polygon.inside(location.getX(), location.getY())) {
 		length+= SPEED;
 		location.setX(center.getX() - length / 2);
+		}
 		
 	}
 
+		
 	
 	@Override
 	protected void draw(Graphics g) {

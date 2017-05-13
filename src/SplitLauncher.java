@@ -23,6 +23,5 @@ public class SplitLauncher {
 		splitFrame.add(splitPanel);
 		splitFrame.pack();
 		splitFrame.setVisible(true);
-	}
-	
+	}	
 }

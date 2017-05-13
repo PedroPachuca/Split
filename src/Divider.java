@@ -10,6 +10,7 @@ public abstract class Divider implements Collidable {
 	protected final int SPEED = 10;
 	protected final int DIMS = 10;
 	protected Rectangle boundingRect;
+	protected boolean stopGrowing = false;
 	
 	protected Rectangle getBoundingRect() {
 		return boundingRect;
