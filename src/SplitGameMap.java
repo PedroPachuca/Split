@@ -16,7 +16,6 @@ public class SplitGameMap extends GameMap{
 	private int cushion = 10;
 	public SplitGameMap(Vector dims) {
 		dimensions = dims;
-		//clearAndinitDividers();
 		createBall();
 		createWalls();
 
@@ -54,21 +53,15 @@ public class SplitGameMap extends GameMap{
 			w.draw(g);
 		}
 	}
-
-	private void clearAndinitDividers() {
-		dividers.clear();
-		
-		HorizontalDivider hd = new HorizontalDivider(0, 0);
-		VerticalDivider vd = new VerticalDivider(0, 0);
-		
-		dividers.add(hd);
-		dividers.add(vd);
-	}
 	
 	private void createBall() {
 		
 		final int ballRadius = 100;
 		ball = new Ball(dimensions.getX() / 3, dimensions.getY() / 3, ballRadius);
 		
+	}
+	
+	public void addWall(Divider div) {
+		dividers.add(div);
 	}
 }

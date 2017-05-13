@@ -95,8 +95,6 @@ public class Ball {
 
 		move();
 		move();
-		
-		System.out.println("ball bounced");
 	}
 	
 	public int getRandomXMovement(){

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Polygon {
         
-    private ArrayList<Wall> walls = new ArrayList<Wall>();
+    private static ArrayList<Wall> walls = new ArrayList<Wall>();
     
     public Polygon(){
         
@@ -17,7 +17,7 @@ public class Polygon {
         return walls;
     }
     
-    public boolean inside(int x, int y){
+    public static boolean inside(int x, int y){
         boolean up=false;
         boolean down=false;
         boolean right=false;

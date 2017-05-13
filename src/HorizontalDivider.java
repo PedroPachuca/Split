@@ -8,7 +8,7 @@ public class HorizontalDivider extends Divider{
 	public HorizontalDivider(int x, int y) {
 		location = new Vector(x, y);
 		length = 0;
-		boundingRect = new Rectangle(x, y, DIMS, length);
+		boundingRect = new Rectangle(x, y, length, DIMS);
 	}
 	
 	@Override
@@ -26,12 +26,12 @@ public class HorizontalDivider extends Divider{
 	@Override
 	protected void draw(Graphics g) {
 		this.updateRect();
-		g.fillRect(location.getX(), location.getY(), DIMS, length);
+		g.fillRect(location.getX(), location.getY(), length, DIMS);
 		
 	}
 
 	protected void updateRect() {
-		this.boundingRect = new Rectangle(location.getX(), location.getY(), DIMS, length);
+		this.boundingRect = new Rectangle(location.getX(), location.getY(), length, DIMS);
 		
 	}
 

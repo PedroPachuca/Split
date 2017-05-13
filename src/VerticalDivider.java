@@ -8,7 +8,7 @@ public class VerticalDivider extends Divider {
 	public VerticalDivider(int x, int y) {
 		location = new Vector(x, y);
 		length = 0;
-		this.boundingRect = new Rectangle(x, y, length, DIMS);
+		this.boundingRect = new Rectangle(x, y, DIMS, length);
 	}
 	@Override
 	public void collided(Ball b) {
@@ -25,12 +25,12 @@ public class VerticalDivider extends Divider {
 	@Override
 	protected void draw(Graphics g) {
 		this.updateRect();
-		g.fillRect(location.getX(), location.getY(), length, DIMS);
+		g.fillRect(location.getX(), location.getY(), DIMS, length);
 		
 	}
 	@Override
 	protected void updateRect() {
-		this.boundingRect = new Rectangle(location.getX(), location.getY(), length, DIMS);
+		this.boundingRect = new Rectangle(location.getX(), location.getY(), DIMS, length);
 		
 	}
 

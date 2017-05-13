@@ -34,7 +34,7 @@ public class SplitPanel extends JPanel{
 		private int areaAvailable;
 		private JProgressBar progressBar;
 		private int areaCutOff;
-		private String typeOfDivider;
+		private String typeOfDivider = null;
 		//private Polygon map;
 
 		public SplitPanel(int width, int length) {
@@ -51,6 +51,53 @@ public class SplitPanel extends JPanel{
 			Color backgroundColor = Color.GREEN;
 			this.setBackground(backgroundColor);
 			
+			
+			this.addMouseListener(new MouseListener() {
+
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mousePressed(MouseEvent click) {
+					Divider div = null;
+					if(Polygon.inside(click.getX(), click.getY())) {
+						if(typeOfDivider != null) {
+							if(typeOfDivider.equals("vertical")) {
+								div = new VerticalDivider(click.getX(), click.getY());
+							}
+							else {
+								div = new HorizontalDivider(click.getX(), click.getY());
+							}
+						}
+					}
+					
+					if(div != null) {
+						gm.addWall(div);
+					}
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+		
 			beginGame();			
 		}
 
