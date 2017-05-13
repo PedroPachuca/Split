@@ -13,7 +13,7 @@ public class Polygon {
         walls.add(wall);
     }
     
-    public ArrayList<Wall> walls(){
+    public static ArrayList<Wall> walls(){
         return walls;
     }
     

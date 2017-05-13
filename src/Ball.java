@@ -14,8 +14,8 @@ public class Ball {
 	
 	private int x, y, radius, params;
 	private BufferedImage img;
-	private int a = getRandomXMovement()*-1;
-	private int b = getRandomYMovement()*-1;
+	private int a = getRandomXMovement();
+	private int b = getRandomYMovement();
 	private Rectangle boundingRect;
 	
 	public Ball(int x, int y, int radius){
@@ -78,19 +78,30 @@ public class Ball {
 	}
 	
 	public void bounce(){
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		ArrayList<Wall> wallList = Polygon.walls();
 		
-		if((this.boundingRect.getMinX()>20) && (this.boundingRect.getMinX()<30)){ //left wall
-			a*=-1;
-		}
-		else if((this.boundingRect.getMaxY()>(600-150-10)) && (this.boundingRect.getMaxY()<(600))){ //bottom wall
-			b*=-1;
-		}
-		else if(this.boundingRect.getMinY()>20 && this.boundingRect.getMinY()<30){//top wall
-			b*=-1;
-		}
-		else if(this.boundingRect.getMaxX()>(800-30) && this.boundingRect.getMaxX()<(800)){//right wall
-			a*=-1;
+		for(int i = 0; i < wallList.size(); i++){
+			if(wallList.get(i).getWidth()==10){
+				if(this.boundingRect.getMaxX()>wallList.get(i).getX() && this.boundingRect.getMaxX()<(wallList.get(i).getX()+wallList.get(i).getWidth())){//right wall
+					a*=-1;
+					break;
+				}
+				else if((this.boundingRect.getMinX()>wallList.get(i).getX()) && (this.boundingRect.getMinX()<wallList.get(i).getWidth()+wallList.get(i).getX())){ //left wall
+					a*=-1;
+					break;
+				}
+			}
+			else if(wallList.get(i).getLength()==10){
+				if((this.boundingRect.getMaxY()>wallList.get(i).getY()) && (this.boundingRect.getMaxY()<wallList.get(i).getLength()+wallList.get(i).getY())){ //bottom wall
+					b*=-1;
+					break;
+				}		
+				else if(this.boundingRect.getMinY()>wallList.get(i).getY() && this.boundingRect.getMinY()<wallList.get(i).getY()+wallList.get(i).getLength()){//top wall
+					b*=-1;
+					break;
+				}
+			}
 		}
 
 		move();
@@ -98,11 +109,11 @@ public class Ball {
 	}
 	
 	public int getRandomXMovement(){
-		int x = (int)(Math.random()*5)+1;		
+		int x = (int)(Math.random()*8)+1;		
 		return x;
 	}
 	public int getRandomYMovement(){
-		int y = (int)(Math.random()*5)+1;		
+		int y = (int)(Math.random()*8)+1;		
 		return y;
 	}
 	
