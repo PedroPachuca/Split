@@ -7,6 +7,7 @@ public class VerticalDivider extends Divider {
 	
 	public VerticalDivider(int x, int y) {
 		location = new Vector(x, y);
+		center = new Vector(x, y);
 		length = 0;
 		this.boundingRect = new Rectangle(x, y, DIMS, length);
 	}
@@ -21,6 +22,7 @@ public class VerticalDivider extends Divider {
 	@Override
 	protected void grow() {
 		length += SPEED;
+		location.setY(center.getY() - length / 2);
 	}
 	@Override
 	protected void draw(Graphics g) {

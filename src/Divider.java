@@ -6,8 +6,9 @@ public abstract class Divider implements Collidable {
 
 	protected int length;
 	protected Vector location;
+	protected Vector center;
 	protected final int SPEED = 10;
-	protected final int DIMS = 20;
+	protected final int DIMS = 10;
 	protected Rectangle boundingRect;
 	
 	protected Rectangle getBoundingRect() {

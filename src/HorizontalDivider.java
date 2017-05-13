@@ -7,6 +7,7 @@ public class HorizontalDivider extends Divider{
 	
 	public HorizontalDivider(int x, int y) {
 		location = new Vector(x, y);
+		center = new Vector(x, y);
 		length = 0;
 		boundingRect = new Rectangle(x, y, length, DIMS);
 	}
@@ -22,8 +23,11 @@ public class HorizontalDivider extends Divider{
 	@Override
 	protected void grow() {
 		length+= SPEED;
+		location.setX(center.getX() - length / 2);
+		
 	}
 
+	
 	@Override
 	protected void draw(Graphics g) {
 		this.updateRect();
