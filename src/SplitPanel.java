@@ -121,7 +121,7 @@ public class SplitPanel extends JPanel{
 			progressBar.setOpaque(true);
 			progressBar.setIndeterminate(true);
 			progressBar.setBackground(Color.blue);
-			progressBar.setForeground(Color.GREEN);
+			progressBar.setForeground(Color.GRAY);
 			progressBar.setVisible(true);
 			barPanel.add(progressBar);
 			this.add(barPanel,BorderLayout.NORTH);

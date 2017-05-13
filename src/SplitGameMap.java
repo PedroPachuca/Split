@@ -40,6 +40,7 @@ public class SplitGameMap extends GameMap{
 		}
 		for(Divider div: dividers) {
 			div.grow();
+			div.collided(ball);
 		}
 	}
 
@@ -62,6 +63,8 @@ public class SplitGameMap extends GameMap{
 	}
 	
 	public void addWall(Divider div) {
+		if(dividers.isEmpty()) {
 		dividers.add(div);
+		}
 	}
 }
