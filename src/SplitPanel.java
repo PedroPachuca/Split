@@ -35,12 +35,14 @@ public class SplitPanel extends JPanel{
 		private JProgressBar progressBar;
 		private int areaCutOff;
 		private String typeOfDivider = null;
+		private int centerX, centerY;
 		//private Polygon map;
 
 		public SplitPanel(int width, int length) {
 			this.setLayout(new BorderLayout());
-			
 			dimensions = new Vector(width, length);
+			centerX = dimensions.getX() / 2;
+			centerY = dimensions.getY() / 2;
 			openBackgroundImg();
 			progressBar = new JProgressBar();
 			level = 1;
@@ -78,16 +80,17 @@ public class SplitPanel extends JPanel{
 					if(Polygon.inside(click.getX(), click.getY())) {
 						if(typeOfDivider != null) {
 							if(typeOfDivider.equals("vertical")) {
-								div = new VerticalDivider(click.getX(), click.getY());
+								System.out.println(centerY);
+								div = new VerticalDivider(click.getX(), click.getY(), centerY);
 							}
 							else {
-								div = new HorizontalDivider(click.getX(), click.getY());
+								div = new HorizontalDivider(click.getX(), click.getY(), centerX);
 							}
 						}
 					}
 					
 					if(div != null) {
-						gm.addWall(div);
+						gm.addDivider(div);
 					}
 				}
 
@@ -115,7 +118,7 @@ public class SplitPanel extends JPanel{
 			JPanel barPanel = new JPanel();
 			barPanel.setLayout(new GridLayout());
 			barPanel.setPreferredSize(new Dimension(100, 20));
-			
+			centerY -= 10;
 			progressBar.setMaximum(areaAvailable / 2);
 			progressBar.setMinimum(0);
 			progressBar.setOpaque(true);
@@ -224,6 +227,7 @@ public class SplitPanel extends JPanel{
 			//TODO PICK COLOR
 			
 			this.add(buttonPanel,BorderLayout.SOUTH);
+			centerY -= horizontalDividerButton.getIcon().getIconHeight() / 2 + 5;
 		}
 
 		private void openImages() {

@@ -57,7 +57,7 @@ public class SplitGameMap extends GameMap{
 		
 	}
 	
-	public void addWall(Divider div) {
+	public void addDivider(Divider div) {
 		if(dividers.isEmpty()) {
 		dividers.add(div);
 		}

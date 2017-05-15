@@ -5,9 +5,9 @@ import java.awt.Rectangle;
 public class VerticalDivider extends Divider {
 
 	
-	public VerticalDivider(int x, int y) {
+	public VerticalDivider(int x, int y, int centerY) {
 		location = new Vector(x, y);
-		center = new Vector(x, y);
+		center = new Vector(x, centerY);
 		length = 0;
 		this.boundingRect = new Rectangle(x, y, DIMS, length);
 	}
