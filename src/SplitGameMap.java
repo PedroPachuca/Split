@@ -21,8 +21,8 @@ public class SplitGameMap extends GameMap{
         polygon.add(new Wall(cushion*2,dimensions.getY()-150-cushion,dimensions.getX()-4*cushion,cushion));
         polygon.add(new Wall(cushion*2,cushion*2,dimensions.getX()-4*cushion,cushion));
         polygon.add(new Wall(dimensions.getX()-cushion*3,cushion*2,cushion,dimensions.getY()-150-2*cushion));
-        polygon = polygon.split(cushion*2+3,300,dimensions.getX()-cushion*3+3,300,700,100,new Wall(cushion*2, 300,dimensions.getX()-cushion*3+3-cushion*2,cushion),null);
-		updateAllPolygons();
+        //polygon = polygon.split(cushion*2+3,300,dimensions.getX()-cushion*3+3,300,700,100,new Wall(cushion*2, 300,dimensions.getX()-cushion*3+3-cushion*2,cushion),null);
+		//updateAllPolygons();
 	}
 	
 	private void updateAllPolygons() {
