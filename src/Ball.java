@@ -98,36 +98,40 @@ public class Ball {
 					updateRect();
 					
 				}
-				if((this.boundingRect.getMinX()>wallList.get(i).getX()) && (this.boundingRect.getMinX()<wallList.get(i).getWidth()+wallList.get(i).getX())){ //left wall
+				else if((this.boundingRect.getMinX()>wallList.get(i).getX()) && (this.boundingRect.getMinX()<wallList.get(i).getWidth()+wallList.get(i).getX())){ //left wall
 					a*=-1;
 					x+=10;
 					updateRect();
 
 				}
 			}
-			if(wallList.get(i).getLength()==10){
+			else if(wallList.get(i).getLength()==10){
 				if((this.boundingRect.getMaxY()>wallList.get(i).getY()) && (this.boundingRect.getMaxY()<wallList.get(i).getLength()+wallList.get(i).getY())){ //bottom wall
 					b*=-1;
 					y-=10;
 					updateRect();
 
 				}		
-				if(this.boundingRect.getMinY()>wallList.get(i).getY() && this.boundingRect.getMinY()<wallList.get(i).getY()+wallList.get(i).getLength()){//top wall
+				else if(this.boundingRect.getMinY()>wallList.get(i).getY() && this.boundingRect.getMinY()<wallList.get(i).getY()+wallList.get(i).getLength()){//top wall
 					b*=-1;
 					y+=10;
 					updateRect();
 
 				}
 			}
+			System.out.println("a="+a);
+			System.out.println("b="+b);
 		}
 	}
 	
 	public int getRandomXMovement(){
-		int x = (int)(Math.random()*8)+1;		
+		int x = 5;
+		//int x = (int)(Math.random()*8)+1;		
 		return x;
 	}
 	public int getRandomYMovement(){
-		int y = (int)(Math.random()*8)+1;		
+		int y = 5;
+		//int y = (int)(Math.random()*8)+1;		
 		return y;
 	}
 	
