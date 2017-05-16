@@ -85,21 +85,18 @@ public class Ball {
 			if(wallList.get(i).getWidth()==10){
 				if(this.boundingRect.getMaxX()>wallList.get(i).getX() && this.boundingRect.getMaxX()<(wallList.get(i).getX()+wallList.get(i).getWidth())){//right wall
 					a*=-1;
-					break;
+					
 				}
-				else if((this.boundingRect.getMinX()>wallList.get(i).getX()) && (this.boundingRect.getMinX()<wallList.get(i).getWidth()+wallList.get(i).getX())){ //left wall
+				if((this.boundingRect.getMinX()>wallList.get(i).getX()) && (this.boundingRect.getMinX()<wallList.get(i).getWidth()+wallList.get(i).getX())){ //left wall
 					a*=-1;
-					break;
 				}
 			}
-			else if(wallList.get(i).getLength()==10){
+			if(wallList.get(i).getLength()==10){
 				if((this.boundingRect.getMaxY()>wallList.get(i).getY()) && (this.boundingRect.getMaxY()<wallList.get(i).getLength()+wallList.get(i).getY())){ //bottom wall
 					b*=-1;
-					break;
 				}		
-				else if(this.boundingRect.getMinY()>wallList.get(i).getY() && this.boundingRect.getMinY()<wallList.get(i).getY()+wallList.get(i).getLength()){//top wall
+				if(this.boundingRect.getMinY()>wallList.get(i).getY() && this.boundingRect.getMinY()<wallList.get(i).getY()+wallList.get(i).getLength()){//top wall
 					b*=-1;
-					break;
 				}
 			}
 		}
