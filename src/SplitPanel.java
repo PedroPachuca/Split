@@ -119,6 +119,8 @@ public class SplitPanel extends JPanel{
 			barPanel.setLayout(new GridLayout());
 			barPanel.setPreferredSize(new Dimension(100, 20));
 			centerY -= 10;
+			progressBar.setStringPainted(true);
+			progressBar.validate();
 			progressBar.setMaximum(areaAvailable / 2);
 			progressBar.setMinimum(0);
 			progressBar.setOpaque(true);
