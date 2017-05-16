@@ -5,10 +5,10 @@ import java.awt.Rectangle;
 public class HorizontalDivider extends Divider{
 
 	
-	public HorizontalDivider(int x, int y, int centerX, Polygon poly) {
+	public HorizontalDivider(int x, int y, Polygon poly) {
 		map = poly;
 		location = new Vector(x, y);
-		center = new Vector(centerX, y);
+		center = new Vector(map.getWidth() / 2 + 20, y);
 		length = 0;
 		boundingRect = new Rectangle(x, y, length, DIMS);
 	}

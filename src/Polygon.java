@@ -5,8 +5,37 @@ public class Polygon {
         
     private ArrayList<Wall> walls = new ArrayList<Wall>();
     
+    
     public Polygon(){
         
+    }
+    
+    public int getHeight(){
+    	int max=-100000;
+    	int min=100000;
+    	for(Wall wall: walls){
+    		if(wall.getY()<min){
+    			min=wall.getY();
+    		}
+    		if(wall.getY()+10>max){
+    			max=wall.getY()+10;
+    		}
+    	}
+    	return max-min;
+    }
+    
+    public int getWidth(){
+    	int max=-100000;
+    	int min=100000;
+    	for(Wall wall: walls){
+    		if(wall.getX()<min){
+    			min=wall.getX();
+    		}
+    		if(wall.getX()+10>max){
+    			max=wall.getX()+10;
+    		}
+    	}
+    	return max-min;
     }
     
     public void add(Wall wall){
