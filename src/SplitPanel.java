@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -80,7 +81,6 @@ public class SplitPanel extends JPanel{
 					if(Polygon.inside(click.getX(), click.getY())) {
 						if(typeOfDivider != null) {
 							if(typeOfDivider.equals("vertical")) {
-								System.out.println(centerY);
 								div = new VerticalDivider(click.getX(), click.getY(), centerY);
 							}
 							else {
@@ -253,7 +253,7 @@ public class SplitPanel extends JPanel{
 					gm.tick();// I tell the GameMap to tick... do what
 						// you do every time the clock goes off.
 					repaint();// naturally, we want to see the new view
-
+					Toolkit.getDefaultToolkit().sync();
 					//This sketchy stuff requests a mouse location every frame so it repaints
 			        //MouseInfo.getPointerInfo().getLocation();
 				}

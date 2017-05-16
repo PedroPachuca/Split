@@ -17,6 +17,7 @@ public class Ball {
 	private int a = getRandomXMovement();
 	private int b = getRandomYMovement();
 	private Rectangle boundingRect;
+	private boolean alive = true;
 	
 	public Ball(int x, int y, int radius){
 		this.setX(x);
@@ -71,10 +72,18 @@ public class Ball {
 	public int getY(){
 		return this.y;
 	}
+	public void setAlive(boolean al) {
+		alive = al;
+	}
+	public boolean getAlive() {
+		return alive;
+	}
 	
 	public void draw(Graphics g){
+		if(alive) {
 		this.updateRect();
 		g.drawImage(img, x, y, params, params, null);
+		}
 	}
 	
 	public void bounce(){

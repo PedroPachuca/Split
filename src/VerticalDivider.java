@@ -14,8 +14,9 @@ public class VerticalDivider extends Divider {
 	@Override
 	public void collided(Ball b) {
 		if(getBoundingRect().intersects(b.getBoundingRect())) {
-			//TODO rip
-			System.out.println("ball hit a divider");
+			if(!stopGrowing) {
+				b.setAlive(false);
+			}
 		}
 	}
 
@@ -24,6 +25,9 @@ public class VerticalDivider extends Divider {
 		if(Polygon.inside(location.getX(), location.getY())) {
 		length += SPEED;
 		location.setY(center.getY() - length / 2);
+		}
+		else {
+			stopGrowing = true;
 		}
 	}
 	@Override
