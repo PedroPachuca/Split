@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Polygon {
         
-    private static ArrayList<Wall> walls = new ArrayList<Wall>();
+    private ArrayList<Wall> walls = new ArrayList<Wall>();
     
     public Polygon(){
         
@@ -13,11 +13,11 @@ public class Polygon {
         walls.add(wall);
     }
     
-    public static ArrayList<Wall> walls(){
+    public ArrayList<Wall> walls(){
         return walls;
     }
     
-    public static boolean inside(int x, int y){
+    public boolean inside(int x, int y){
         boolean up=false;
         boolean down=false;
         boolean right=false;
@@ -122,7 +122,32 @@ public class Polygon {
     	}
     	else if(y1==y2){
     		for(Wall wall: walls){
-    			
+    			if(wall.getX()!=wall1.getX()||wall.getY()!=wall1.getY()||wall.getLength()!=wall1.getLength()||wall.getWidth()!=wall1.getWidth()){
+    				if(wall.getX()!=wall2.getX()||wall.getY()!=wall2.getY()||wall.getLength()!=wall2.getLength()||wall.getWidth()!=wall2.getWidth()){
+    					if(wall.getY()>y1){
+    						p2.add(wall);
+    					}
+    					else{
+    						p1.add(wall);
+    					}
+    				}
+    			}
+    		}
+    		p1.add(wall1a);
+    		p1.add(wall2a);
+    		p2.add(wall1b);
+    		p2.add(wall2b);
+    		p1.add(divider1);
+    		p2.add(divider1);
+    		if(divider2!=null){
+    			p1.add(divider2);
+    			p2.add(divider2);
+    		}
+    		if(p1.inside(ballX1,ballX2)){
+    			return p1;
+    		}
+    		else{
+    			return p2;
     		}
     	}
     	else if((x1>x2&&y1>y2)||(x2>x1&&y2>y1)){
@@ -139,5 +164,5 @@ public class Polygon {
     	
     }
 
-
 }
+

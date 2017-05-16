@@ -11,9 +11,13 @@ public abstract class Divider implements Collidable {
 	protected final int DIMS = 10;
 	protected Rectangle boundingRect;
 	protected boolean stopGrowing = false;
+	protected Polygon map;
 	
 	protected Rectangle getBoundingRect() {
 		return boundingRect;
+	}
+	protected void updatePolygon(Polygon newMap) {
+		map = newMap;
 	}
 	
 	protected int getLength() {

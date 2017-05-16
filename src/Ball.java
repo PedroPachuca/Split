@@ -18,8 +18,10 @@ public class Ball {
 	private int b = getRandomYMovement();
 	private Rectangle boundingRect;
 	private boolean alive = true;
+	private Polygon map;
 	
-	public Ball(int x, int y, int radius){
+	public Ball(int x, int y, int radius, Polygon poly){
+		map = poly;
 		this.setX(x);
 		this.setY(y);
 		this.radius=radius;
@@ -40,6 +42,9 @@ public class Ball {
 	}
 	public int getSquareParams() {
 		return params;
+	}
+	public void updatePolygon(Polygon newMap) {
+		map = newMap;
 	}
 	
 	private void updateRect() {
@@ -88,7 +93,7 @@ public class Ball {
 	
 	public void bounce(){
 		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		ArrayList<Wall> wallList = Polygon.walls();
+		ArrayList<Wall> wallList = map.walls();
 		
 		for(int i = 0; i < wallList.size(); i++){
 			if(wallList.get(i).getWidth()==10){

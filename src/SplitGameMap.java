@@ -6,7 +6,7 @@ public class SplitGameMap extends GameMap{
 
 	private Ball ball;
 	private Vector dimensions;
-	private Polygon  polygon = new Polygon();
+	private Polygon polygon = new Polygon();
 	private ArrayList<Divider> dividers = new ArrayList<Divider>();
 	private int cushion = 10;
 	public SplitGameMap(Vector dims) {
@@ -21,11 +21,17 @@ public class SplitGameMap extends GameMap{
         polygon.add(new Wall(cushion*2,dimensions.getY()-150-cushion,dimensions.getX()-4*cushion,cushion));
         polygon.add(new Wall(cushion*2,cushion*2,dimensions.getX()-4*cushion,cushion));
         polygon.add(new Wall(dimensions.getX()-cushion*3,cushion*2,cushion,dimensions.getY()-150-2*cushion));
-        //polygon=polygon.split(500,cushion*2+3,500,cushion*2+dimensions.getY()-150-2*cushion-3,490,300,new Wall(500
-        //		,cushion*2,cushion,dimensions.getY()-150-2*cushion),null);
-		
+        polygon = polygon.split(cushion*2+3,300,dimensions.getX()-cushion*3+3,300,700,100,new Wall(cushion*2, 300,dimensions.getX()-cushion*3+3-cushion*2,cushion),null);
+		updateAllPolygons();
 	}
 	
+	private void updateAllPolygons() {
+		ball.updatePolygon(polygon);
+		for(Divider div: dividers) {
+			div.updatePolygon(polygon);
+		}
+		
+	}
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
@@ -53,7 +59,7 @@ public class SplitGameMap extends GameMap{
 	private void createBall() {
 		
 		final int ballRadius = 100;
-		ball = new Ball(dimensions.getX() / 3, dimensions.getY() / 3, ballRadius);
+		ball = new Ball(dimensions.getX() / 3, dimensions.getY() / 3, ballRadius, polygon);
 		
 	}
 	
@@ -61,5 +67,8 @@ public class SplitGameMap extends GameMap{
 		if(dividers.isEmpty()) {
 		dividers.add(div);
 		}
+	}
+	public Polygon getPolygon() {
+		return polygon;
 	}
 }

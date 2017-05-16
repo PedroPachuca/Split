@@ -5,7 +5,8 @@ import java.awt.Rectangle;
 public class HorizontalDivider extends Divider{
 
 	
-	public HorizontalDivider(int x, int y, int centerX) {
+	public HorizontalDivider(int x, int y, int centerX, Polygon poly) {
+		map = poly;
 		location = new Vector(x, y);
 		center = new Vector(centerX, y);
 		length = 0;
@@ -23,7 +24,7 @@ public class HorizontalDivider extends Divider{
 
 	@Override
 	protected void grow() {
-		if(Polygon.inside(location.getX(), location.getY())) {
+		if(map.inside(location.getX(), location.getY())) {
 		length+= SPEED;
 		location.setX(center.getX() - length / 2);
 		}

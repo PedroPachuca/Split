@@ -5,7 +5,8 @@ import java.awt.Rectangle;
 public class VerticalDivider extends Divider {
 
 	
-	public VerticalDivider(int x, int y, int centerY) {
+	public VerticalDivider(int x, int y, int centerY, Polygon poly) {
+		map = poly;
 		location = new Vector(x, y);
 		center = new Vector(x, centerY);
 		length = 0;
@@ -22,7 +23,7 @@ public class VerticalDivider extends Divider {
 
 	@Override
 	protected void grow() {
-		if(Polygon.inside(location.getX(), location.getY())) {
+		if(map.inside(location.getX(), location.getY())) {
 		length += SPEED;
 		location.setY(center.getY() - length / 2);
 		}

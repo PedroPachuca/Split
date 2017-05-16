@@ -78,13 +78,13 @@ public class SplitPanel extends JPanel{
 				@Override
 				public void mousePressed(MouseEvent click) {
 					Divider div = null;
-					if(Polygon.inside(click.getX(), click.getY())) {
+					if(gm.getPolygon().inside(click.getX(), click.getY())) {
 						if(typeOfDivider != null) {
 							if(typeOfDivider.equals("vertical")) {
-								div = new VerticalDivider(click.getX(), click.getY(), centerY);
+								div = new VerticalDivider(click.getX(), click.getY(), centerY, gm.getPolygon());
 							}
 							else {
-								div = new HorizontalDivider(click.getX(), click.getY(), centerX);
+								div = new HorizontalDivider(click.getX(), click.getY(), centerX, gm.getPolygon());
 							}
 						}
 					}
