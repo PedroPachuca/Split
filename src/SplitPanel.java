@@ -249,7 +249,7 @@ public class SplitPanel extends JPanel{
 						// you do every time the clock goes off.
 					repaint();// naturally, we want to see the new view
 					Toolkit.getDefaultToolkit().sync();
-					//LESS LAG WOOHOO
+					//LESS LAG WOOHOOO
 					//This sketchy stuff requests a mouse location every frame so it repaints
 			        //MouseInfo.getPointerInfo().getLocation();
 				}
