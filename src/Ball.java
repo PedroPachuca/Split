@@ -38,7 +38,6 @@ public class Ball {
 		catch(IOException e) {
 			System.out.println("Unable to instantiate image");
 		}
-		
 	}
 	public int getSquareParams() {
 		return params;
@@ -98,26 +97,29 @@ public class Ball {
 		for(int i = 0; i < wallList.size(); i++){
 			if(wallList.get(i).getWidth()==10){
 				if(this.boundingRect.getMaxX()>wallList.get(i).getX() && this.boundingRect.getMaxX()<(wallList.get(i).getX()+wallList.get(i).getWidth())){//right wall
+					if(a>0)
 					a*=-1;
 					x-=10;
-					updateRect();
-					
+					updateRect();					
 				}
 				if((this.boundingRect.getMinX()>wallList.get(i).getX()) && (this.boundingRect.getMinX()<wallList.get(i).getWidth()+wallList.get(i).getX())){ //left wall
+					if(a<0)
 					a*=-1;
 					x+=10;
 					updateRect();
-
+					
 				}
 			}
 			if(wallList.get(i).getLength()==10){
 				if((this.boundingRect.getMaxY()>wallList.get(i).getY()) && (this.boundingRect.getMaxY()<wallList.get(i).getLength()+wallList.get(i).getY())){ //bottom wall
+					if(b>0)
 					b*=-1;
 					y-=10;
 					updateRect();
 
 				}		
 				if(this.boundingRect.getMinY()>wallList.get(i).getY() && this.boundingRect.getMinY()<wallList.get(i).getY()+wallList.get(i).getLength()){//top wall
+					if(b<0)
 					b*=-1;
 					y+=10;
 					updateRect();
@@ -129,11 +131,11 @@ public class Ball {
 	
 	public int getRandomXMovement(){
 		int x = (int)(Math.random()*8)+1;		
-		return x;
+		return 7;
 	}
 	public int getRandomYMovement(){
 		int y = (int)(Math.random()*8)+1;		
-		return y;
+		return 7;
 	}
 	
 	public void move() {
