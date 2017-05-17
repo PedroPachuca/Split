@@ -131,11 +131,11 @@ public class Ball {
 	
 	public int getRandomXMovement(){
 		int x = (int)(Math.random()*8)+1;		
-		return 7;
+		return x;
 	}
 	public int getRandomYMovement(){
 		int y = (int)(Math.random()*8)+1;		
-		return 7;
+		return y;
 	}
 	
 	public void move() {
