@@ -32,6 +32,10 @@ public class SplitGameMap extends GameMap{
 		}
 		
 	}
+	
+	public Ball getBall() {
+		return ball;
+	}
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
@@ -70,5 +74,10 @@ public class SplitGameMap extends GameMap{
 	}
 	public Polygon getPolygon() {
 		return polygon;
+	}
+	
+	public void newSplit(Polygon newPolygon) {
+		polygon = newPolygon;
+		updateAllPolygons();
 	}
 }

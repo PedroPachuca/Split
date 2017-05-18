@@ -4,15 +4,17 @@ import java.awt.Rectangle;
 
 public class HorizontalDivider extends Divider{
 
-	
-	public HorizontalDivider(int x, int y, Polygon poly) {
+
+	public HorizontalDivider(int x, int y, Polygon poly, Ball b, SplitGameMap gameMap) {
+		this.gm = gameMap;
+		this.ball = b;
 		map = poly;
 		location = new Vector(x, y);
 		center = new Vector(map.getWidth() / 2 + 20, y);
 		length = 0;
 		boundingRect = new Rectangle(x, y, length, DIMS);
 	}
-	
+
 	@Override
 	public void collided(Ball b) {
 		if(getBoundingRect().intersects(b.getBoundingRect())) {
@@ -25,27 +27,37 @@ public class HorizontalDivider extends Divider{
 	@Override
 	protected void grow() {
 		if(map.inside(location.getX(), location.getY())) {
-		length+= SPEED;
-		location.setX(center.getX() - length / 2);
+			length+= SPEED;
+			location.setX(center.getX() - length / 2);
 		}
 		else {
+			if(!stopGrowing) {
+				dividerSplit();
+			}
 			stopGrowing = true;
 		}
-		
+
 	}
 
-		
-	
+
+
 	@Override
 	protected void draw(Graphics g) {
 		this.updateRect();
 		g.fillRect(location.getX(), location.getY(), length, DIMS);
-		
+
 	}
 
 	protected void updateRect() {
 		this.boundingRect = new Rectangle(location.getX(), location.getY(), length, DIMS);
-		
+
+	}
+
+	@Override
+	protected void dividerSplit() {
+		Polygon newPolygon = map.split(this.location.getX(), this.location.getY(), this.location.getX() + length, this.location.getY(), ball.getX(), ball.getY(), this, null);
+		System.out.println(newPolygon.walls());
+		gm.newSplit(newPolygon);
 	}
 
 

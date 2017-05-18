@@ -5,7 +5,9 @@ import java.awt.Rectangle;
 public class VerticalDivider extends Divider {
 
 	
-	public VerticalDivider(int x, int y, Polygon poly) {
+	public VerticalDivider(int x, int y, Polygon poly, Ball b, SplitGameMap gameMap) {
+		this.gm = gameMap;
+		this.ball = b;
 		map = poly;
 		location = new Vector(x, y);
 		center = new Vector(x, poly.getHeight() / 2 + 20);
@@ -28,6 +30,9 @@ public class VerticalDivider extends Divider {
 		location.setY(center.getY() - length / 2);
 		}
 		else {
+			if(!stopGrowing) {
+				dividerSplit();
+			}
 			stopGrowing = true;
 		}
 	}
@@ -41,6 +46,11 @@ public class VerticalDivider extends Divider {
 	protected void updateRect() {
 		this.boundingRect = new Rectangle(location.getX(), location.getY(), DIMS, length);
 		
+	}
+	@Override
+	protected void dividerSplit() {
+		Polygon newPolygon = map.split(this.location.getX(), this.location.getY(), this.location.getX() + length, this.location.getY(), ball.getX(), ball.getY(), this, null);
+		//gm.newSplit(newPolygon);
 	}
 
 }

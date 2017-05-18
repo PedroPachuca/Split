@@ -12,7 +12,8 @@ public abstract class Divider implements Collidable {
 	protected Rectangle boundingRect;
 	protected boolean stopGrowing = false;
 	protected Polygon map;
-	
+	protected Ball ball;
+	protected SplitGameMap gm;
 	protected Rectangle getBoundingRect() {
 		return boundingRect;
 	}
@@ -23,15 +24,15 @@ public abstract class Divider implements Collidable {
 	protected int getLength() {
 		return length;
 	}
-	
-	protected Divider getType() {
-		return this.getType();
-	}
+	protected abstract void dividerSplit();
 	
 	protected abstract void updateRect();
 	
 	protected abstract void grow();
 	
 	protected abstract void draw(Graphics g);
-
+	
+	protected int getDims() {
+		return DIMS;
+	}
 }
