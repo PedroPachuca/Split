@@ -84,12 +84,15 @@ public class Polygon {
 
 	public Polygon split(int x1,int y1,int x2,int y2, int ballX1, int ballX2, Divider d1, Divider d2){
 		System.out.println("Polygon SPLIT");
+		Wall divider1 = null;
 		Wall divider2 = null;
 		if(d2 != null) {
 			divider2 = new Wall(d2.location.getX(), d2.location.getY(), d2.getLength(), d2.getDims());
 		}
-
-		Wall divider1 = new Wall(d1.location.getX(), d1.location.getY(), d1.getLength(), d1.getDims());
+		if(x1==x2)
+			divider1 = new Wall(d1.location.getX(), d1.location.getY(), d1.getDims(),d1.getLength() );
+		else if(y1==y2)
+			divider1 = new Wall(d1.location.getX(), d1.location.getY(), d1.getLength(),d1.getDims());
 		Wall wall1 = null;
 		Wall wall2 = null;
 		Wall wall1a = null;
@@ -111,11 +114,12 @@ public class Polygon {
 		}
 		if(wall1.getWidth()==10){
 			wall1a = new Wall(wall1.getX(),wall1.getY(), 10,y1-wall1.getY()+10);
-			wall1b = new Wall(wall1.getX(),y1,20,wall1.getY()+wall1.getLength()-y1);
+			wall1b = new Wall(wall1.getX(),y1,10,wall1.getY()+wall1.getLength()-y1);
 		}
 		else if(wall1.getLength()==10){
 			wall1a = new Wall(wall1.getX(),wall1.getY(), x1-wall1.getX()+10,10);
 			wall1b = new Wall(x1,wall1.getY(),wall1.getX()+wall1.getWidth()-x1,10);
+
 		}
 		if(wall2.getWidth()==10){
 			wall2a = new Wall(wall2.getX(),wall2.getY(), 10,y2-wall2.getY()+10);
@@ -124,9 +128,10 @@ public class Polygon {
 		else if(wall2.getLength()==10){
 			wall2a = new Wall(wall2.getX(),wall2.getY(), x2-wall2.getX()+10,10);
 			wall2b = new Wall(x2,wall2.getY(),wall2.getX()+wall2.getWidth()-x2,10);
-			System.out.println(wall2a.getWidth());
 		}
 		if(x1==x2){
+			System.out.println(wall1b.getY());
+			System.out.println(divider1.getLength());
 			for(Wall wall: walls){
 				if(wall.getX()!=wall1.getX()||wall.getY()!=wall1.getY()||wall.getLength()!=wall1.getLength()||wall.getWidth()!=wall1.getWidth()){
 					if(wall.getX()!=wall2.getX()||wall.getY()!=wall2.getY()||wall.getLength()!=wall2.getLength()||wall.getWidth()!=wall2.getWidth()){
@@ -153,9 +158,12 @@ public class Polygon {
 				System.out.println(132);
 				return p1;
 			}
-			else{
+			else if(p2.inside(ballX1, ballX2)){
 				System.out.println(4523);
 				return p2;
+			}
+			else{
+				return null;
 			}
 		}
 		else if(y1==y2){
@@ -184,8 +192,11 @@ public class Polygon {
 			if(p1.inside(ballX1,ballX2)){
 				return p1;
 			}
-			else{
+			else if(p2.inside(ballX1,ballX2)){
 				return p2;
+			}
+			else{
+				return null;
 			}
 		}
 		else if((x1>x2&&y1>y2)||(x2>x1&&y2>y1)){
