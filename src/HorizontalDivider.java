@@ -56,7 +56,7 @@ public class HorizontalDivider extends Divider{
 	@Override
 	protected void dividerSplit() {
 		Polygon newPolygon = map.split(this.location.getX(), this.location.getY(), this.location.getX() + length, this.location.getY(), ball.getX(), ball.getY(), this, null);
-		System.out.println(newPolygon.walls());
+		gm.ready();
 		gm.newSplit(newPolygon);
 	}
 

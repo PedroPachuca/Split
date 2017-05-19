@@ -9,6 +9,7 @@ public class SplitGameMap extends GameMap{
 	private Polygon polygon = new Polygon();
 	private ArrayList<Divider> dividers = new ArrayList<Divider>();
 	private int cushion = 10;
+	private boolean ready = true;
 	public SplitGameMap(Vector dims) {
 		dimensions = dims;
 		createBall();
@@ -35,6 +36,9 @@ public class SplitGameMap extends GameMap{
 	
 	public Ball getBall() {
 		return ball;
+	}
+	public void ready() {
+		ready = true;
 	}
 	@Override
 	public void tick() {
@@ -68,7 +72,8 @@ public class SplitGameMap extends GameMap{
 	}
 	
 	public void addDivider(Divider div) {
-		if(dividers.isEmpty()) {
+		if(ready) {
+		dividers.clear();
 		dividers.add(div);
 		}
 	}
