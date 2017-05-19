@@ -49,8 +49,8 @@ public class VerticalDivider extends Divider {
 	}
 	@Override
 	protected void dividerSplit() {
-		Polygon newPolygon = map.split(this.location.getX(), this.location.getY(), this.location.getX() + length, this.location.getY(), ball.getX(), ball.getY(), this, null);
-		//gm.newSplit(newPolygon);
+		Polygon newPolygon = map.split(this.location.getX(), this.location.getY(), this.location.getX(), this.location.getY() + length, ball.getX(), ball.getY(), this, null);
+		gm.newSplit(newPolygon);
 	}
 
 }

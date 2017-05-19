@@ -31,7 +31,6 @@ public class SplitGameMap extends GameMap{
 		for(Divider div: dividers) {
 			div.updatePolygon(polygon);
 		}
-		
 	}
 	
 	public Ball getBall() {

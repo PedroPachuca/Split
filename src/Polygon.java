@@ -88,7 +88,7 @@ public class Polygon {
 		if(d2 != null) {
 			divider2 = new Wall(d2.location.getX(), d2.location.getY(), d2.getLength(), d2.getDims());
 		}
-		
+
 		Wall divider1 = new Wall(d1.location.getX(), d1.location.getY(), d1.getLength(), d1.getDims());
 		Wall wall1 = null;
 		Wall wall2 = null;
@@ -150,9 +150,11 @@ public class Polygon {
 				p2.add(divider2);
 			}
 			if(p1.inside(ballX1,ballX2)){
+				System.out.println(132);
 				return p1;
 			}
 			else{
+				System.out.println(4523);
 				return p2;
 			}
 		}
