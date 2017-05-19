@@ -1,6 +1,11 @@
 
 import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 public class SplitGameMap extends GameMap{
 
@@ -10,11 +15,18 @@ public class SplitGameMap extends GameMap{
 	private ArrayList<Divider> dividers = new ArrayList<Divider>();
 	private int cushion = 10;
 	private boolean ready = true;
+	private Image gameOver;
 	public SplitGameMap(Vector dims) {
 		dimensions = dims;
 		createBall();
 		createWalls();
-
+		File file = new File("src/THEBACKGROUND.jpg");
+		try {
+			gameOver = ImageIO.read(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	private void createWalls() {
 
@@ -54,12 +66,17 @@ public class SplitGameMap extends GameMap{
 
 	@Override
 	public void draw(Graphics g) {
-		ball.draw(g);
-		for(Divider div: dividers) {
-			div.draw(g);
+		if (ball.getAlive()) {
+			ball.draw(g);
+			for(Divider div: dividers) {
+				div.draw(g);
+			}
+			for(Wall w: polygon.walls()) {
+				w.draw(g);
+			}
 		}
-		for(Wall w: polygon.walls()) {
-			w.draw(g);
+		else {
+			g.drawImage(gameOver, 0, 0, null);
 		}
 	}
 	

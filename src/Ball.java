@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class Ball {
-	
+
 	private int x, y, radius, params;
 	private BufferedImage img;
 	private int a = getRandomXMovement();
@@ -19,131 +19,144 @@ public class Ball {
 	private Rectangle boundingRect;
 	private boolean alive = true;
 	private Polygon map;
-	
-	public Ball(int x, int y, int radius, Polygon poly){
+
+	public Ball(int x, int y, int radius, Polygon poly) {
 		map = poly;
 		this.setX(x);
 		this.setY(y);
-		this.radius=radius;
+		this.radius = radius;
 		getImg();
 		params = radius / 2;
 		boundingRect = new Rectangle(x, y, params, params);
 	}
-	
+
 	private void getImg() {
-		
+
 		try {
 			img = ImageIO.read(new File("src/ball.png"));
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			System.out.println("Unable to instantiate image");
 		}
 	}
+
 	public int getSquareParams() {
 		return params;
 	}
+
 	public void updatePolygon(Polygon newMap) {
 		map = newMap;
 	}
-	
+
 	private void updateRect() {
 		this.boundingRect = new Rectangle(x, y, params, params);
 	}
+
 	public Rectangle getBoundingRect() {
 		return boundingRect;
 	}
-	
-	public void setX(int x){
+
+	public void setX(int x) {
 		this.x = x;
 	}
-	
-	public void setY(int y){
+
+	public void setY(int y) {
 		this.y = y;
 	}
-	
-	public void setA(){
+
+	public void setA() {
 		a = getRandomXMovement();
 	}
-	
-	public void setB(){
+
+	public void setB() {
 		b = getRandomYMovement();
 	}
-	
-	public int getX(){
+
+	public int getX() {
 		return this.x;
 	}
-	
-	public int getY(){
+
+	public int getY() {
 		return this.y;
 	}
+
 	public void setAlive(boolean al) {
 		alive = al;
 	}
+
 	public boolean getAlive() {
 		return alive;
 	}
-	
-	public void draw(Graphics g){
-		if(alive) {
-		this.updateRect();
-		g.drawImage(img, x, y, params, params, null);
+
+	public void draw(Graphics g) {
+		if (alive) {
+			this.updateRect();
+			g.drawImage(img, x, y, params, params, null);
 		}
 	}
-	
-	public void bounce(){
-		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+	public void bounce() {
+		// Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		ArrayList<Wall> wallList = map.walls();
-		
-		for(int i = 0; i < wallList.size(); i++){
-			if(wallList.get(i).getWidth()==10){
-				if(this.boundingRect.getMaxX()>wallList.get(i).getX() && this.boundingRect.getMaxX()<(wallList.get(i).getX()+wallList.get(i).getWidth())){//right wall
-					if(a>0)
-					a*=-1;
-					x-=10;
-					updateRect();					
-				}
-				if((this.boundingRect.getMinX()>wallList.get(i).getX()) && (this.boundingRect.getMinX()<wallList.get(i).getWidth()+wallList.get(i).getX())){ //left wall
-					if(a<0)
-					a*=-1;
-					x+=10;
+
+		for (int i = 0; i < wallList.size(); i++) {
+			if (wallList.get(i).getWidth() == 10) {
+				if (this.boundingRect.getMaxX() > wallList.get(i).getX()
+						&& this.boundingRect.getMaxX() < (wallList.get(i).getX() + wallList.get(i).getWidth())) {// right
+																													// wall
+					if (a > 0)
+						a *= -1;
+					x -= 10;
 					updateRect();
-					
 				}
-			}
-			if(wallList.get(i).getLength()==10){
-				if((this.boundingRect.getMaxY()>wallList.get(i).getY()) && (this.boundingRect.getMaxY()<wallList.get(i).getLength()+wallList.get(i).getY())){ //bottom wall
-					if(b>0)
-					b*=-1;
-					y-=10;
+				if ((this.boundingRect.getMinX() > wallList.get(i).getX())
+						&& (this.boundingRect.getMinX() < wallList.get(i).getWidth() + wallList.get(i).getX())) { // left
+																													// wall
+					if (a < 0)
+						a *= -1;
+					x += 10;
 					updateRect();
 
-				}		
-				if(this.boundingRect.getMinY()>wallList.get(i).getY() && this.boundingRect.getMinY()<wallList.get(i).getY()+wallList.get(i).getLength()){//top wall
-					if(b<0)
-					b*=-1;
-					y+=10;
+				}
+			}
+			if (wallList.get(i).getLength() == 10) {
+				if ((this.boundingRect.getMaxY() > wallList.get(i).getY())
+						&& (this.boundingRect.getMaxY() < wallList.get(i).getLength() + wallList.get(i).getY())) { // bottom
+																													// wall
+					if (b > 0)
+						b *= -1;
+					y -= 10;
+					updateRect();
+
+				}
+				if (this.boundingRect.getMinY() > wallList.get(i).getY()
+						&& this.boundingRect.getMinY() < wallList.get(i).getY() + wallList.get(i).getLength()) {// top
+																												// wall
+					if (b < 0)
+						b *= -1;
+					y += 10;
 					updateRect();
 
 				}
 			}
 		}
 	}
-	
-	public int getRandomXMovement(){
-		int x = (int)(Math.random()*8)+1;		
+
+	public int getRandomXMovement() {
+		int x = (int) (Math.random() * 8) + 1;
 		return x;
 	}
-	public int getRandomYMovement(){
-		int y = (int)(Math.random()*8)+1;		
+
+	public int getRandomYMovement() {
+		int y = (int) (Math.random() * 8) + 1;
 		return y;
 	}
-	
+
 	public void move() {
-		this.x+=a;
-		this.y+=b;
+		this.x += a;
+		this.y += b;
 	}
-	
-	public void die(Graphics g){
-	
+
+	public void die(Graphics g) {
+
 	}
 }
