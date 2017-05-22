@@ -9,7 +9,27 @@ public class Polygon {
 	public Polygon(){
 
 	}
-
+	
+	public int getMinX(int y){
+		int minX=1234567890;
+		for(Wall wall: walls){
+			if(wall.getY()<=y&&wall.getY()+wall.getLength()>y){
+				if(minX>wall.getX())
+					minX=wall.getX();
+			}
+		}
+		return minX;
+	}
+	public int getMinY(int x){
+		int minY=1234567890;
+		for(Wall wall: walls){
+			if(wall.getX()<=x&&wall.getX()+wall.getWidth()>x){
+				if(minY>wall.getY())
+					minY=wall.getY();
+			}
+		}
+		return minY;
+	}
 	public int getHeight(){
 		int max=-100000;
 		int min=100000;
@@ -86,9 +106,8 @@ public class Polygon {
 		System.out.println("Polygon SPLIT");
 		Wall divider1 = null;
 		Wall divider2 = null;
-		if(d2 != null) {
+		if(d2 != null) 
 			divider2 = new Wall(d2.location.getX(), d2.location.getY(), d2.getLength(), d2.getDims());
-		}
 		if(x1==x2)
 			divider1 = new Wall(d1.location.getX(), d1.location.getY(), d1.getDims(),d1.getLength() );
 		else if(y1==y2)
@@ -154,11 +173,11 @@ public class Polygon {
 				p1.add(divider2);
 				p2.add(divider2);
 			}
-			if(p1.inside(ballX1,ballX2)){
+			if(p1.inside(ballX1+Ball.radius/2,ballX2+Ball.radius/2)){
 				System.out.println(132);
 				return p1;
 			}
-			else if(p2.inside(ballX1, ballX2)){
+			else if(p2.inside(ballX1+Ball.radius/2,ballX2+Ball.radius/2)){
 				System.out.println(4523);
 				return p2;
 			}
@@ -189,10 +208,10 @@ public class Polygon {
 				p1.add(divider2);
 				p2.add(divider2);
 			}
-			if(p1.inside(ballX1,ballX2)){
+			if(p1.inside(ballX1+Ball.radius/2,ballX2+Ball.radius/2)){
 				return p1;
 			}
-			else if(p2.inside(ballX1,ballX2)){
+			else if(p2.inside(ballX1+Ball.radius/2,ballX2+Ball.radius/2)){
 				return p2;
 			}
 			else{

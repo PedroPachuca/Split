@@ -12,7 +12,9 @@ import javax.imageio.ImageIO;
 
 public class Ball {
 
-	private int x, y, radius, params;
+	private int x, y;
+	static int radius;
+	private int params;
 	private BufferedImage img;
 	private int a = getRandomXMovement();
 	private int b = getRandomYMovement();
