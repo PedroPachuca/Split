@@ -129,7 +129,6 @@ public class SplitPanel extends JPanel{
 		//			System.out.println(areaCutOff);
 		//			System.out.println(progressBar.getMaximum());
 		if (areaCutOff * 2 >= areaAvailable) {
-			gm = new SplitGameMap(dimensions);
 			areaCutOff = 0;
 			level++;
 		}
