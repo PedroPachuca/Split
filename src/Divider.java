@@ -14,6 +14,8 @@ public abstract class Divider implements Collidable {
 	protected Polygon map;
 	protected Ball ball;
 	protected SplitGameMap gm;
+	protected boolean firstHit = false;
+	protected boolean secondHit = false;
 	protected Rectangle getBoundingRect() {
 		return boundingRect;
 	}
