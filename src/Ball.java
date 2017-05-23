@@ -43,17 +43,21 @@ public class Ball {
 	}
 
 	public void setSpeed(int level) {
-		if (a < 0) {
-			a = 0 - SPEED - 2 * level;
+		if (a > -10 && a < 10) {
+			if (a < 0) {
+				a = 0 - SPEED - 2 * level;
+			}
+			if (a > 0) {
+				a = 0 + SPEED + 2 * level;
+			}
 		}
-		if (a > 0) {
-			a = 0 + SPEED + 2 * level;
-		}
-		if (b < 0) {
-			b = 0 - SPEED - 2 * level;
-		}
-		if (b > 0) {
-			b = 0 + SPEED + 2 * level;
+		if (b > -10 && b < 10) {
+			if (b < 0) {
+				b = 0 - SPEED - 2 * level;
+			}
+			if (b > 0) {
+				b = 0 + SPEED + 2 * level;
+			}
 		}
 	}
 
@@ -160,12 +164,12 @@ public class Ball {
 	}
 
 	public int getRandomXMovement() {
-		// int x = (int) (Math.random() * 8) + 1;
+//		int x = (int) (Math.random() * 8) + 1;
 		return SPEED;
 	}
 
 	public int getRandomYMovement() {
-		// int y = (int) (Math.random() * 8) + 1;
+//		int y = (int) (Math.random() * 8) + 1;
 		return SPEED;
 	}
 
