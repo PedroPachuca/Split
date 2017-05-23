@@ -15,6 +15,7 @@ public class SplitGameMap extends GameMap {
 	private ArrayList<Divider> dividers = new ArrayList<Divider>();
 	private int cushion = 10;
 	private boolean ready = true;
+	private boolean localReady = true;
 	private Image gameOver;
 	private final int STARTWIDTH;
 	private final int STARTHEIGHT;
@@ -108,9 +109,10 @@ public class SplitGameMap extends GameMap {
 	}
 
 	public void addDivider(Divider div) {
-		if (ready) {
+		if (ready && localReady) {
 			dividers.clear();
 			dividers.add(div);
+			localReady = false;
 		}
 	}
 
@@ -119,6 +121,7 @@ public class SplitGameMap extends GameMap {
 	}
 
 	public void newSplit(Polygon newPolygon) {
+		localReady = true;
 		polygon = newPolygon;
 		updateAllPolygons();
 	}
