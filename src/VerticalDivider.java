@@ -27,7 +27,7 @@ public class VerticalDivider extends Divider {
 	protected void grow() {
 		if(map.inside(location.getX(), location.getY())) {
 		length += SPEED;
-		location.setY(center.getY() - length / 2);
+		location.setY(center.getY() - length / 2 + getPush());
 		}
 		else {
 			if(!stopGrowing) {
@@ -51,6 +51,10 @@ public class VerticalDivider extends Divider {
 	protected void dividerSplit() {
 		Polygon newPolygon = map.split(this.location.getX(), this.location.getY(), this.location.getX(), this.location.getY() + length, ball.getX(), ball.getY(), this, null);
 		gm.newSplit(newPolygon);
+	}
+	
+	private int getPush() {
+		return map.getMinY(this.location.getX()) - 20;
 	}
 
 }

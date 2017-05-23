@@ -103,7 +103,6 @@ public class Polygon {
 	}
 
 	public Polygon split(int x1,int y1,int x2,int y2, int ballX1, int ballX2, Divider d1, Divider d2){
-		System.out.println("Polygon SPLIT");
 		Wall divider1 = null;
 		Wall divider2 = null;
 		if(d2 != null) 
@@ -149,8 +148,6 @@ public class Polygon {
 			wall2b = new Wall(x2,wall2.getY(),wall2.getX()+wall2.getWidth()-x2,10);
 		}
 		if(x1==x2){
-			System.out.println(wall1b.getY());
-			System.out.println(divider1.getLength());
 			for(Wall wall: walls){
 				if(wall.getX()!=wall1.getX()||wall.getY()!=wall1.getY()||wall.getLength()!=wall1.getLength()||wall.getWidth()!=wall1.getWidth()){
 					if(wall.getX()!=wall2.getX()||wall.getY()!=wall2.getY()||wall.getLength()!=wall2.getLength()||wall.getWidth()!=wall2.getWidth()){
@@ -174,11 +171,9 @@ public class Polygon {
 				p2.add(divider2);
 			}
 			if(p1.inside(ballX1+Ball.radius/2,ballX2+Ball.radius/2)){
-				System.out.println(132);
 				return p1;
 			}
 			else if(p2.inside(ballX1+Ball.radius/2,ballX2+Ball.radius/2)){
-				System.out.println(4523);
 				return p2;
 			}
 			else{

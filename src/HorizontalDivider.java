@@ -28,7 +28,8 @@ public class HorizontalDivider extends Divider{
 	protected void grow() {
 		if(map.inside(location.getX(), location.getY())) {
 			length+= SPEED;
-			location.setX(center.getX() - length / 2);
+			location.setX(center.getX() - length / 2 + getPush());
+			
 		}
 		else {
 			if(!stopGrowing) {
@@ -40,7 +41,9 @@ public class HorizontalDivider extends Divider{
 	}
 
 
-
+	private int getPush() {
+		return map.getMinX(this.location.getY()) - 20;
+	}
 	@Override
 	protected void draw(Graphics g) {
 		this.updateRect();
