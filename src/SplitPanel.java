@@ -146,7 +146,7 @@ public class SplitPanel extends JPanel{
 		//			System.out.println(progressBar.getMaximum());
 		if (progressBar.getString().equals("100%")) {
 			areaAvailable -= areaCutOff;
-			progressBar.setMaximum(areaAvailable / 2);
+			progressBar.setMaximum(areaAvailable / 100 * (50 + 5 * (level - 1)));
 			System.out.print(areaAvailable);
 			areaCutOff = 0;
 			gm.getBall().setSpeed(level);
@@ -155,6 +155,9 @@ public class SplitPanel extends JPanel{
 		if (gm.getPolygon() != null)	
 			areaCutOff = areaAvailable - gm.getPolygon().getHeight() * gm.getPolygon().getWidth();
 		progressBar.setValue(areaCutOff);
+		if (level == 3) {
+			gm = new SplitGameMap(dimensions);
+		}
 	}
 	
 	private void displayLabel(Graphics g) {

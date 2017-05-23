@@ -21,7 +21,7 @@ public class Ball {
 	private Rectangle boundingRect;
 	private boolean alive = true;
 	private Polygon map;
-	private final int SPEED = 4;
+	private final int SPEED = 5;
 
 	public Ball(int x, int y, int radius, Polygon poly) {
 		map = poly;
@@ -43,20 +43,20 @@ public class Ball {
 	}
 
 	public void setSpeed(int level) {
-		if (a > -10 && a < 10) {
+		if (a > -7 && a < 7) {
 			if (a < 0) {
-				a = 0 - SPEED - 2 * level;
+				a = 0 - SPEED - 1 * level;
 			}
 			if (a > 0) {
-				a = 0 + SPEED + 2 * level;
+				a = 0 + SPEED + 1 * level;
 			}
 		}
-		if (b > -10 && b < 10) {
+		if (b > -7 && b < 7) {
 			if (b < 0) {
-				b = 0 - SPEED - 2 * level;
+				b = 0 - SPEED - 1 * level;
 			}
 			if (b > 0) {
-				b = 0 + SPEED + 2 * level;
+				b = 0 + SPEED + 1 * level;
 			}
 		}
 	}
