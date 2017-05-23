@@ -21,6 +21,7 @@ public class Ball {
 	private Rectangle boundingRect;
 	private boolean alive = true;
 	private Polygon map;
+	private final int SPEED = 4;
 
 	public Ball(int x, int y, int radius, Polygon poly) {
 		map = poly;
@@ -38,6 +39,21 @@ public class Ball {
 			img = ImageIO.read(new File("src/ball.png"));
 		} catch (IOException e) {
 			System.out.println("Unable to instantiate image");
+		}
+	}
+
+	public void setSpeed(int level) {
+		if (a < 0) {
+			a = 0 - SPEED - 2 * level;
+		}
+		if (a > 0) {
+			a = 0 + SPEED + 2 * level;
+		}
+		if (b < 0) {
+			b = 0 - SPEED - 2 * level;
+		}
+		if (b > 0) {
+			b = 0 + SPEED + 2 * level;
 		}
 	}
 
@@ -104,7 +120,7 @@ public class Ball {
 			if (wallList.get(i).getWidth() == 10) {
 				if (this.boundingRect.getMaxX() > wallList.get(i).getX()
 						&& this.boundingRect.getMaxX() < (wallList.get(i).getX() + wallList.get(i).getWidth())) {// right
-																													// wall
+					// wall
 					if (a > 0)
 						a *= -1;
 					x -= 10;
@@ -112,7 +128,7 @@ public class Ball {
 				}
 				if ((this.boundingRect.getMinX() > wallList.get(i).getX())
 						&& (this.boundingRect.getMinX() < wallList.get(i).getWidth() + wallList.get(i).getX())) { // left
-																													// wall
+					// wall
 					if (a < 0)
 						a *= -1;
 					x += 10;
@@ -123,7 +139,7 @@ public class Ball {
 			if (wallList.get(i).getLength() == 10) {
 				if ((this.boundingRect.getMaxY() > wallList.get(i).getY())
 						&& (this.boundingRect.getMaxY() < wallList.get(i).getLength() + wallList.get(i).getY())) { // bottom
-																													// wall
+					// wall
 					if (b > 0)
 						b *= -1;
 					y -= 10;
@@ -132,7 +148,7 @@ public class Ball {
 				}
 				if (this.boundingRect.getMinY() > wallList.get(i).getY()
 						&& this.boundingRect.getMinY() < wallList.get(i).getY() + wallList.get(i).getLength()) {// top
-																												// wall
+					// wall
 					if (b < 0)
 						b *= -1;
 					y += 10;
@@ -144,13 +160,13 @@ public class Ball {
 	}
 
 	public int getRandomXMovement() {
-		int x = (int) (Math.random() * 8) + 1;
-		return x;
+		// int x = (int) (Math.random() * 8) + 1;
+		return SPEED;
 	}
 
 	public int getRandomYMovement() {
-		int y = (int) (Math.random() * 8) + 1;
-		return y;
+		// int y = (int) (Math.random() * 8) + 1;
+		return SPEED;
 	}
 
 	public void move() {

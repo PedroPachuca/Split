@@ -16,7 +16,7 @@ public class SplitGameMap extends GameMap {
 	private int cushion = 10;
 	private boolean ready = true;
 	private boolean localReady = true;
-	private Image gameOver;
+	private Image gameOverImage;
 	private final int STARTWIDTH;
 	private final int STARTHEIGHT;
 
@@ -28,7 +28,7 @@ public class SplitGameMap extends GameMap {
 		STARTWIDTH = polygon.getWidth();
 		File file = new File("src/THEBACKGROUND.jpg");
 		try {
-			gameOver = ImageIO.read(file);
+			gameOverImage = ImageIO.read(file);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,7 +97,8 @@ public class SplitGameMap extends GameMap {
 				w.draw(g);
 			}
 		} else {
-			g.drawImage(gameOver, 0, 0, null);
+			g.drawImage(gameOverImage, 0, 0, null);
+			gameOver();
 		}
 	}
 
@@ -124,5 +125,9 @@ public class SplitGameMap extends GameMap {
 		localReady = true;
 		polygon = newPolygon;
 		updateAllPolygons();
+	}
+
+	public boolean getGameOver() {
+		return gameOver;
 	}
 }

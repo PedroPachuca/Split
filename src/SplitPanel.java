@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -21,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 public class SplitPanel extends JPanel{
@@ -36,6 +38,7 @@ public class SplitPanel extends JPanel{
 	private JProgressBar progressBar;
 	private int areaCutOff;
 	private String typeOfDivider = null;
+	JTextField levelsField;
 	//private Polygon map;
 
 	public SplitPanel(int width, int length) {
@@ -93,6 +96,7 @@ public class SplitPanel extends JPanel{
 			}
 		});
 
+		level = 1;
 		beginGame();
 		areaAvailable = gm.getPolygon().getHeight() * gm.getPolygon().getWidth();
 		progressBar = new JProgressBar();
@@ -114,26 +118,47 @@ public class SplitPanel extends JPanel{
 		JPanel barPanel = new JPanel();
 		barPanel.setLayout(new GridLayout());
 		barPanel.setPreferredSize(new Dimension(100, 20));
-		progressBar.setMaximum(areaAvailable / 2);
 		progressBar.setMinimum(0);
+		progressBar.setMaximum(areaAvailable / 2);
 		progressBar.setOpaque(true);
 		progressBar.setStringPainted(true);
 		progressBar.setBackground(Color.blue);
 		progressBar.setForeground(Color.GRAY);
 		progressBar.setVisible(true);
+		barPanel.add(createLevels());
 		barPanel.add(progressBar);
 		this.add(barPanel,BorderLayout.NORTH);
+		updateBar();
+	}
+
+	private Component createLevels() {
+		levelsField = new JTextField();
+		levelsField.setText("" + level);
+		return levelsField;
+	}
+	
+	private void updateLevels() {
+		levelsField.setText("" + level);
 	}
 
 	public void updateBar() {
 		//			System.out.println(areaCutOff);
 		//			System.out.println(progressBar.getMaximum());
-		if (areaCutOff * 2 >= areaAvailable) {
+		if (progressBar.getString().equals("100%")) {
+			areaAvailable -= areaCutOff;
+			progressBar.setMaximum(areaAvailable / 2);
+			System.out.print(areaAvailable);
 			areaCutOff = 0;
+			gm.getBall().setSpeed(level);
 			level++;
 		}
-		areaCutOff = areaAvailable - gm.getPolygon().getHeight() * gm.getPolygon().getWidth();
+		if (gm.getPolygon() != null)	
+			areaCutOff = areaAvailable - gm.getPolygon().getHeight() * gm.getPolygon().getWidth();
 		progressBar.setValue(areaCutOff);
+	}
+	
+	private void displayLabel(Graphics g) {
+		
 	}
 
 	private void beginGame() {
@@ -270,9 +295,11 @@ public class SplitPanel extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		updateBar();
-		g.drawImage(img, 0, 0, dimensions.getX(), dimensions.getY(), null);
+		if (!gm.getGameOver()) {
+			updateLevels();
+			updateBar();
+			g.drawImage(img, 0, 0, dimensions.getX(), dimensions.getY(), null);
+		}
 		gm.draw(g);
 	}
 
