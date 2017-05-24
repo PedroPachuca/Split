@@ -164,15 +164,21 @@ public class Ball {
 	}
 
 	public int getRandomXMovement() {
-		int x = (int) (Math.random() * 8) + 1;
-		
-		return SPEED;
+		int x = (int) (Math.random() * 6) + 3;
+		int g = (int) (Math.random() * 2);
+		if(g%2==0){
+			x*=-1;
+		}
+		return x;
 	}
 
 	public int getRandomYMovement() {
-		int y = (int) (Math.random() * 8) + 1;
-		
-		return SPEED;
+		int y = (int) (Math.random() * 6) + 3;
+		int g = (int) (Math.random() * 2);
+		if(g%2==0){
+			y*=-1;
+		}
+		return y;
 	}
 
 	public void move() {

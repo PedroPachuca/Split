@@ -149,7 +149,7 @@ public class SplitPanel extends JPanel {
 			progressBar.setMaximum(areaAvailable);
 			System.out.print(areaAvailable);
 			areaCutOff = 0;
-			gm.getBall().setSpeed(level);
+			//gm.getBall().setSpeed(level);
 			level++;
 		}
 		if (gm.getPolygon() != null) {

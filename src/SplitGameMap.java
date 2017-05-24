@@ -96,10 +96,12 @@ public class SplitGameMap extends GameMap {
 	}
 
 	private void createBall() {
-
 		final int ballRadius = 100;
-		ball = new Ball(dimensions.getX() / 3, dimensions.getY() / 3, ballRadius, polygon);
-
+		int x = (int) (Math.random()*(dimensions.getX()-cushion*6-100))+cushion*3;
+		int y = (int) (Math.random()*(dimensions.getY()-150-cushion-cushion*3-100))+cushion*3;
+		ball = new Ball(x, y, ballRadius, polygon);
+		System.out.println("x = "+x);
+		System.out.println("y = "+y);
 	}
 
 	public void addDivider(Divider div) {
