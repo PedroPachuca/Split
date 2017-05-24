@@ -25,7 +25,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
-public class SplitPanel extends JPanel{
+public class SplitPanel extends JPanel {
 
 	// what private data is needed?
 	final Vector dimensions;
@@ -39,16 +39,17 @@ public class SplitPanel extends JPanel{
 	private int areaCutOff;
 	private String typeOfDivider = null;
 	JTextField levelsField;
-	//private Polygon map;
+	private final int startingAreaAvailable;
+	private Image gameOverImage;
+	// private Polygon map;
 
 	public SplitPanel(int width, int length) {
 		this.setLayout(new BorderLayout());
 		dimensions = new Vector(width, length);
 		openBackgroundImg();
-		//TODO Parth make background colors
+		// TODO Parth make background colors
 		Color backgroundColor = Color.GREEN;
 		this.setBackground(backgroundColor);
-
 
 		this.addMouseListener(new MouseListener() {
 
@@ -73,18 +74,17 @@ public class SplitPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent click) {
 				Divider div = null;
-				if(gm.getPolygon().inside(click.getX(), click.getY())) {
-					if(typeOfDivider != null) {
-						if(typeOfDivider.equals("vertical")) {
+				if (gm.getPolygon().inside(click.getX(), click.getY())) {
+					if (typeOfDivider != null) {
+						if (typeOfDivider.equals("vertical")) {
 							div = new VerticalDivider(click.getX(), click.getY(), gm.getPolygon(), gm.getBall(), gm);
-						}
-						else {
+						} else {
 							div = new HorizontalDivider(click.getX(), click.getY(), gm.getPolygon(), gm.getBall(), gm);
 						}
 					}
 				}
 
-				if(div != null) {
+				if (div != null) {
 					gm.addDivider(div);
 				}
 			}
@@ -98,6 +98,7 @@ public class SplitPanel extends JPanel{
 
 		level = 1;
 		beginGame();
+		startingAreaAvailable = gm.getPolygon().getHeight() * gm.getPolygon().getWidth();
 		areaAvailable = gm.getPolygon().getHeight() * gm.getPolygon().getWidth();
 		progressBar = new JProgressBar();
 		setUpProgressBar(width, length);
@@ -107,14 +108,13 @@ public class SplitPanel extends JPanel{
 	private void openBackgroundImg() {
 		try {
 			img = ImageIO.read(new File("src/background.jpg"));
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			System.out.println("Unable to instantiate background");
 		}
 
 	}
 
-	private void setUpProgressBar(int width, int length) {			
+	private void setUpProgressBar(int width, int length) {
 		JPanel barPanel = new JPanel();
 		barPanel.setLayout(new GridLayout());
 		barPanel.setPreferredSize(new Dimension(100, 20));
@@ -127,7 +127,7 @@ public class SplitPanel extends JPanel{
 		progressBar.setVisible(true);
 		barPanel.add(createLevels());
 		barPanel.add(progressBar);
-		this.add(barPanel,BorderLayout.NORTH);
+		this.add(barPanel, BorderLayout.NORTH);
 		updateBar();
 	}
 
@@ -136,32 +136,29 @@ public class SplitPanel extends JPanel{
 		levelsField.setText("" + level);
 		return levelsField;
 	}
-	
+
 	private void updateLevels() {
 		levelsField.setText("" + level);
 	}
 
 	public void updateBar() {
-		//			System.out.println(areaCutOff);
-		//			System.out.println(progressBar.getMaximum());
+		// System.out.println(areaCutOff);
+		// System.out.println(progressBar.getMaximum());
 		if (progressBar.getString().equals("100%")) {
-			areaAvailable -= areaCutOff;
-			progressBar.setMaximum(areaAvailable / 100 * (50 + 5 * (level - 1)));
+			areaAvailable = startingAreaAvailable / 100 * (50 + 5 * (level - 1));
+			progressBar.setMaximum(areaAvailable);
 			System.out.print(areaAvailable);
 			areaCutOff = 0;
 			gm.getBall().setSpeed(level);
 			level++;
 		}
-		if (gm.getPolygon() != null)	
+		if (gm.getPolygon() != null) {
 			areaCutOff = areaAvailable - gm.getPolygon().getHeight() * gm.getPolygon().getWidth();
+		}
 		progressBar.setValue(areaCutOff);
-		if (level == 3) {
+		if (level % 3 == 0) {
 			gm = new SplitGameMap(dimensions);
 		}
-	}
-	
-	private void displayLabel(Graphics g) {
-		
 	}
 
 	private void beginGame() {
@@ -254,23 +251,27 @@ public class SplitPanel extends JPanel{
 		buttonPanel.add(verticalDividerButton);
 
 		buttonPanel.setBackground(Color.CYAN);
-		//TODO PICK COLOR
+		// TODO PICK COLOR
 
-		this.add(buttonPanel,BorderLayout.SOUTH);
+		this.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
 	private void openImages() {
 		try {
 			horizontal = ImageIO.read(new File("src/hoirzontal.png"));
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			System.out.println("Unable to instantiate horiozntal");
 		}
 		try {
 			vertical = ImageIO.read(new File("src/vertical.png"));
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			System.out.println("Unable to instantiate vertical");
+		}
+		try {
+			gameOverImage = ImageIO.read(new File("src/THEBACKGROUND.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
@@ -283,9 +284,10 @@ public class SplitPanel extends JPanel{
 				// you do every time the clock goes off.
 				repaint();// naturally, we want to see the new view
 				Toolkit.getDefaultToolkit().sync();
-				//LESS LAG WOOHOOO
-				//This sketchy stuff requests a mouse location every frame so it repaints
-				//MouseInfo.getPointerInfo().getLocation();
+				// LESS LAG WOOHOOO
+				// This sketchy stuff requests a mouse location every frame so
+				// it repaints
+				// MouseInfo.getPointerInfo().getLocation();
 			}
 		});
 		t.start();
@@ -302,8 +304,12 @@ public class SplitPanel extends JPanel{
 			updateLevels();
 			updateBar();
 			g.drawImage(img, 0, 0, dimensions.getX(), dimensions.getY(), null);
+			gm.draw(g);
 		}
-		gm.draw(g);
+		else {
+			this.removeAll();
+			g.drawImage(gameOverImage, 0, 0, null);
+		}
 	}
 
 }

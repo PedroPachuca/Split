@@ -21,7 +21,7 @@ public class Ball {
 	private Rectangle boundingRect;
 	private boolean alive = true;
 	private Polygon map;
-	private final int SPEED = 5;
+	private final int SPEED = 7;
 
 	public Ball(int x, int y, int radius, Polygon poly) {
 		map = poly;
@@ -164,12 +164,14 @@ public class Ball {
 	}
 
 	public int getRandomXMovement() {
-//		int x = (int) (Math.random() * 8) + 1;
+		int x = (int) (Math.random() * 8) + 1;
+		
 		return SPEED;
 	}
 
 	public int getRandomYMovement() {
-//		int y = (int) (Math.random() * 8) + 1;
+		int y = (int) (Math.random() * 8) + 1;
+		
 		return SPEED;
 	}
 
