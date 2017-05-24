@@ -26,13 +26,6 @@ public class SplitGameMap extends GameMap {
 		createWalls();
 		STARTHEIGHT = polygon.getHeight();
 		STARTWIDTH = polygon.getWidth();
-		File file = new File("src/THEBACKGROUND.jpg");
-		try {
-			gameOverImage = ImageIO.read(file);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	public int getStartWidth() {
@@ -96,8 +89,8 @@ public class SplitGameMap extends GameMap {
 			for (Wall w : polygon.walls()) {
 				w.draw(g);
 			}
-		} else {
-			g.drawImage(gameOverImage, 0, 0, null);
+		} 
+		else {
 			gameOver();
 		}
 	}
