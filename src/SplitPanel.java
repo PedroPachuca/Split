@@ -149,6 +149,13 @@ public class SplitPanel extends JPanel {
 			progressBar.setMaximum(areaAvailable);
 			System.out.print(areaAvailable);
 			areaCutOff = 0;
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			gm = new SplitGameMap(dimensions);
 			//gm.getBall().setSpeed(level);
 			level++;
 		}
