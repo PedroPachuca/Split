@@ -35,19 +35,19 @@ public class VerticalDivider extends Divider {
 			location.setY(center.getY() - length / 2 + getPush());
 		}
 		else if(!map.inside(location.getX(), prospectiveLocation1)) {
-			firstHit = true;
+			leftHit = true;
 		}
 		else {
 			length += SPEED;
 			location.setY(location.getY() - SPEED + getPush());
 		}
 		if(!map.inside(location.getX(), prospectiveLocation2)) {
-			secondHit = true;
+			rightHit = true;
 		}
 		else {
 			length += SPEED;
 		}
-		if(firstHit && secondHit) {
+		if(leftHit && rightHit) {
 			if(!stopGrowing) {
 				dividerSplit();
 			}
@@ -78,8 +78,8 @@ public class VerticalDivider extends Divider {
 			gm.newSplit(newPolygon);	
 		}
 		gm.ready();
-		firstHit = false;
-		secondHit = false;
+		leftHit = false;
+		rightHit = false;
 	}
 
 	private int getPush() {

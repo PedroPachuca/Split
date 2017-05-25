@@ -3,13 +3,11 @@ import java.awt.Rectangle;
 
 public class HorizontalDivider extends Divider {
 
-	public HorizontalDivider(int x, int y, Polygon poly, Ball b,
-			SplitGameMap gameMap) {
+	public HorizontalDivider(int x, int y, Polygon poly, Ball b, SplitGameMap gameMap) {
 		this.gm = gameMap;
 		this.ball = b;
 		map = poly;
 		location = new Vector(x, y);
-		center = new Vector(x, y);
 		length = 0;
 		boundingRect = new Rectangle(x, y, length, DIMS);
 	}
@@ -23,7 +21,7 @@ public class HorizontalDivider extends Divider {
 		}
 	}
 
-	@Override
+	/*@Override
 	protected void grow() {	
 		boolean firstHitInside = map.inside(location.getX(), location.getY());
 		boolean secondHitInside = map.inside(location.getX() + length, location.getY());
@@ -52,7 +50,7 @@ public class HorizontalDivider extends Divider {
 			}
 			stopGrowing = true;
 		}
-	}
+	}*/
 
 	private int getPush() {
 		return map.getMinX(this.location.getY()) - 20;
@@ -69,13 +67,16 @@ public class HorizontalDivider extends Divider {
 
 	}
 
-	@Override
+	/*@Override
 	protected void dividerSplit() {
 		Polygon newPolygon = null;
 		if(map.inside(this.location.getX(), this.location.getY())){
+			this.location.setX(this.location.getX() - SPEED);
+			this.length += SPEED;
 			newPolygon = map.split(this.location.getX() - SPEED, this.location.getY(), this.location.getX(), this.location.getY() + length, ball.getX(), ball.getY(), this, null);
 		}
 		else {
+			this.length += SPEED;
 			newPolygon = map.split(this.location.getX(), this.location.getY(), this.location.getX() + length + SPEED, this.location.getY(), ball.getX(), ball.getY(), this, null);
 		} 
 		if(newPolygon != null) {
@@ -84,6 +85,42 @@ public class HorizontalDivider extends Divider {
 		gm.ready();
 		firstHit = false;
 		secondHit = false;
+	}*/
+
+	@Override
+	protected void grow() {
+		leftHit = !map.inside(this.location.getX(), this.location.getY());
+		rightHit = !map.inside(this.location.getX() + length, this.location.getY());
+		if(!leftHit && !rightHit) {
+			location.setX(location.getX() - SPEED);
+			length += SPEED * 2;
+		}
+		else if(leftHit && !rightHit) {
+			length += SPEED;
+		}
+		else if(rightHit && !leftHit) {
+			location.setX(location.getX() - SPEED);
+			length += SPEED;
+		}
+		if(rightHit && leftHit) {
+			if(!stopGrowing) {
+				dividerSplit();
+			}
+			stopGrowing = true;
+		}
+	}
+
+	@Override
+	protected void dividerSplit() {
+		Polygon newPolygon = null;
+		
+		newPolygon = map.split(this.location.getX(), this.location.getY(), this.location.getX() + length, this.location.getY(), this.ball.getX(), this.ball.getY(), this, null);
+		if(newPolygon != null) {
+			gm.newSplit(newPolygon);
+		}
+		leftHit = false;
+		rightHit = false;
+		
 	}
 
 }
