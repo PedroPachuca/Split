@@ -12,17 +12,23 @@ public class SplitLauncher {
 	public static void main(String[] args) {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		dimensions = new Vector((int) screenSize.getWidth(), (int) screenSize.getHeight());
-		int width = Integer.parseInt(JOptionPane.showInputDialog("Enter Width or 0 for Full Screen"));
+		int width = Integer.parseInt(JOptionPane.showInputDialog("Enter Width over 300 or 0 for Full Screen"));
 		if(width != 0) {
-			int height = Integer.parseInt(JOptionPane.showInputDialog("Enter Height or 0 for Full Screen"));
-			W = width;
-			H = height;
+			int height = Integer.parseInt(JOptionPane.showInputDialog("Enter Height over 300 or 0 for Full Screen"));
+			if(width >= 300 && height >= 300) {
+				W = width;
+				H = height;
+			}
+			else {
+				W = 300;
+				H = 300;
+			}
 		}
 		else {
 			W = dimensions.getX();
 			H = dimensions.getY();
 		}
-		
+
 		new SplitLauncher().startGame();
 	}
 
