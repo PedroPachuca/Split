@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 
 public class Ball {
@@ -29,16 +28,13 @@ public class Ball {
 		params = radius / 2;
 		boundingRect = new Rectangle(x, y, params, params);
 	}
-
 	private void getImg() {
-
 		try {
 			img = ImageIO.read(new File("src/ball.png"));
 		} catch (IOException e) {
 			System.out.println("Unable to instantiate image");
 		}
 	}
-
 	public void setSpeed(int level) {
 		if (a > -7 && a < 7) {
 			if (a < 0) {
@@ -57,62 +53,48 @@ public class Ball {
 			}
 		}
 	}
-
 	public int getSquareParams() {
 		return params;
 	}
-
 	public void updatePolygon(Polygon newMap) {
 		map = newMap;
 	}
-
 	private void updateRect() {
 		this.boundingRect = new Rectangle(x, y, params, params);
 	}
-
 	public Rectangle getBoundingRect() {
 		return boundingRect;
 	}
-
 	public void setX(int x) {
 		this.x = x;
 	}
-
 	public void setY(int y) {
 		this.y = y;
 	}
-
 	public void setA() {
 		a = getRandomXMovement();
 	}
-
 	public void setB() {
 		b = getRandomYMovement();
 	}
-
 	public int getX() {
 		return this.x;
 	}
-
 	public int getY() {
 		return this.y;
 	}
-
 	public void setAlive(boolean al) {
 		alive = al;
 	}
-
 	public boolean getAlive() {
 		return alive;
 	}
-
 	public void draw(Graphics g) {
 		if (alive) {
 			this.updateRect();
 			g.drawImage(img, x, y, params, params, null);
 		}
 	}
-
 	public void bounce() {
 		ArrayList<Wall> wallList = map.walls();
 
@@ -158,7 +140,6 @@ public class Ball {
 			}
 		}
 	}
-
 	public int getRandomXMovement() {
 		int x = (int) (Math.random() * 6) + 3;
 		int g = (int) (Math.random() * 2);
@@ -167,7 +148,6 @@ public class Ball {
 		}
 		return x;
 	}
-
 	public int getRandomYMovement() {
 		int y = (int) (Math.random() * 6) + 3;
 		int g = (int) (Math.random() * 2);
@@ -176,12 +156,10 @@ public class Ball {
 		}
 		return y;
 	}
-
 	public void move() {
 		this.x += a;
 		this.y += b;
 	}
-
 	public void die(Graphics g) {
 
 	}
