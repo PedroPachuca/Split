@@ -82,10 +82,14 @@ public class SplitGameMap extends GameMap {
 	}
 	public void addDivider(Divider div) {
 		if (ready && localReady) {
-			dividers.clear();
+			clearDividers();
 			dividers.add(div);
 			localReady = false;
 		}
+	}
+	
+	public void clearDividers() {
+		dividers.clear();
 	}
 	public Polygon getPolygon() {
 		return polygon;
@@ -93,6 +97,7 @@ public class SplitGameMap extends GameMap {
 	public void newSplit(Polygon newPolygon) {
 		localReady = true;
 		polygon = newPolygon;
+		//clearDividers();
 		updateAllPolygons();
 	}
 	public boolean getGameOver() {
