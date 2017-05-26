@@ -1,7 +1,6 @@
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -12,24 +11,26 @@ public class SplitLauncher {
 	public static void main(String[] args) {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		dimensions = new Vector((int) screenSize.getWidth(), (int) screenSize.getHeight());
-		int width = Integer.parseInt(JOptionPane.showInputDialog("Enter Width over 300 or 0 for Full Screen"));
+		promptDims();
+		new SplitLauncher().startGame();
+	}
+	
+	private static void promptDims() {
+		int width = Integer.parseInt(JOptionPane.showInputDialog("Enter 300 <= Width <= Screen Size over 300 or 0 for Full Screen"));
 		if(width != 0) {
-			int height = Integer.parseInt(JOptionPane.showInputDialog("Enter Height over 300 or 0 for Full Screen"));
-			if(width >= 300 && height >= 300) {
+			int height = Integer.parseInt(JOptionPane.showInputDialog("Enter 300 <= Height <= Screen Size or 0 for Full Screen"));
+			if(width >= 300 && height >= 300 && width <= dimensions.getX() && height <= dimensions.getY()) {
 				W = width;
 				H = height;
 			}
 			else {
-				W = 300;
-				H = 300;
+				promptDims();
 			}
 		}
 		else {
 			W = dimensions.getX();
 			H = dimensions.getY();
 		}
-
-		new SplitLauncher().startGame();
 	}
 
 	private void startGame() {
