@@ -47,7 +47,6 @@ public class SplitGameMap extends GameMap {
 	}
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
 		ball.move();
 		for (Wall w : polygon.walls()) {
 			w.collided(ball);
