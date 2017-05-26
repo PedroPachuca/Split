@@ -212,8 +212,29 @@ public class Polygon {
 		}
 		return null;
 	}
-	public void expand(){
+	public Polygon expand(){
+        Polygon newPolygon = new Polygon();
+        int newHeight=0;
+        int newWidth=0;
+        if(getWidth()/getHeight()<=SplitLauncher.W-40/SplitLauncher.H-170){
+            newHeight=SplitLauncher.H-170;
+            newWidth=(int)(newHeight*getWidth()/getHeight());
+            newPolygon.add(new Wall(SplitLauncher.W/2-newWidth/2,20,newWidth,10));
+            newPolygon.add(new Wall(SplitLauncher.W/2-newWidth/2,20,10,newHeight));
+            newPolygon.add(new Wall(SplitLauncher.W/2-newWidth/2,20+newHeight-10,newWidth,10));
+            newPolygon.add(new Wall(SplitLauncher.W/2+newWidth/2-10,20,10,newHeight));
+            return newPolygon;
+        }
+        else{
+            newWidth=SplitLauncher.W-40;
+            newHeight=(int)(newWidth*getHeight()/getWidth());
+            newPolygon.add(new Wall(20,(SplitLauncher.H-120)/2-newHeight/2,10,newHeight));
+            newPolygon.add(new Wall(20,(SplitLauncher.H-120)/2-newHeight/2,newWidth,10));
+            newPolygon.add(new Wall(20,(SplitLauncher.H-120)/2+newHeight/2-10,newWidth,10));
+            newPolygon.add(new Wall(20+newWidth-10,(SplitLauncher.H-120)/2-newHeight/2,10,newHeight));
+            return newPolygon;
+            
+        }
 	}
-
 }
 
