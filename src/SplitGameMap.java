@@ -57,6 +57,10 @@ public class SplitGameMap extends GameMap {
 			div.collided(ball);
 		}
 	}
+	public void expandPolygon() {
+		polygon = polygon.expand();
+		updateAllPolygons();
+	}
 	@Override
 	public void draw(Graphics g) {
 		if (ball.getAlive()) {
