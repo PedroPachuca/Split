@@ -35,8 +35,13 @@ public class SplitPanel extends JPanel {
 	private int areaCutOff;
 	private String typeOfDivider = null;
 	JTextField levelsField;
+	JTextField l;
 	private final int startingAreaAvailable;
 	private Image gameOverImage;
+	private JPanel buttonPanel;
+	private JPanel iAmDead;
+	private JButton horizontalDividerButton;
+	private JButton verticalDividerButton;
 
 	public SplitPanel(int width, int length) {
 		this.setLayout(new BorderLayout());
@@ -140,11 +145,11 @@ public class SplitPanel extends JPanel {
 	private void createDividerButtons() {
 		openImages();
 
-		JPanel buttonPanel = new JPanel();
+		buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
 
-		JButton horizontalDividerButton = new JButton();
-		JButton verticalDividerButton = new JButton();
+		horizontalDividerButton = new JButton();
+		verticalDividerButton = new JButton();
 
 		horizontalDividerButton.setIcon(new ImageIcon(horizontal));
 		verticalDividerButton.setIcon(new ImageIcon(vertical));
@@ -226,8 +231,18 @@ public class SplitPanel extends JPanel {
 			gm.draw(g);
 		}
 		else {
+			l = new JTextField();
+			l.setText("" + level);
+			buttonPanel.add(l);
+			buttonPanel.remove(horizontalDividerButton);
+			buttonPanel.remove(verticalDividerButton);
 			this.removeAll();
-			g.drawImage(gameOverImage, 0, 0, null);
+			g.drawImage(gameOverImage, 0, 0, dimensions.getX(), dimensions.getY(), null);
+			iAmDead = new JPanel();
+			buttonPanel.setLayout(new FlowLayout());
+			this.add(iAmDead, BorderLayout.SOUTH);
+			buttonPanel.setBackground(Color.CYAN);
+			//g.drawImage(gameOverImage, 0, 0, null);
 		}
 	}
 }
