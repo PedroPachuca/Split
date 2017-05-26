@@ -1,8 +1,6 @@
-import java.awt.Dimension;
+
 import java.awt.Graphics;
-import java.awt.List;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +25,6 @@ public class Ball {
 		map = poly;
 		this.setX(x);
 		this.setY(y);
-		this.radius = radius;
 		getImg();
 		params = radius / 2;
 		boundingRect = new Rectangle(x, y, params, params);
@@ -117,7 +114,6 @@ public class Ball {
 	}
 
 	public void bounce() {
-		// Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		ArrayList<Wall> wallList = map.walls();
 
 		for (int i = 0; i < wallList.size(); i++) {

@@ -1,17 +1,16 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-
 public class VerticalDivider extends Divider {
 
+	boolean topHit = false;
+	boolean bottomHit = false;
 
 	public VerticalDivider(int x, int y, Polygon poly, Ball b, SplitGameMap gameMap) {
 		this.gm = gameMap;
 		this.ball = b;
 		map = poly;
 		location = new Vector(x, y);
-		//center = new Vector(x, poly.getHeight() / 2 + 20);
-		center = new Vector(x, y);
 		length = 0;
 		this.boundingRect = new Rectangle(x, y, DIMS, length);
 	}
@@ -23,31 +22,22 @@ public class VerticalDivider extends Divider {
 			}
 		}
 	}
-
 	@Override
 	protected void grow() {
-		boolean firstHitInside = map.inside(location.getX(), location.getY());
-		boolean secondHitInside = map.inside(location.getX(), location.getY() + length);
-		int prospectiveLocation1 = location.getY() - SPEED;
-		int prospectiveLocation2 = location.getY() + length + SPEED;
-		if(firstHitInside && secondHitInside) {
-			length+= SPEED;
-			location.setY(center.getY() - length / 2 + getPush());
+		topHit = !map.inside(this.location.getX(), this.location.getY());
+		bottomHit = !map.inside(this.location.getX(), this.location.getY() + length);
+		if(!topHit && !bottomHit) {
+			location.setY(location.getY() - SPEED);
+			length += SPEED * 2;
 		}
-		else if(!map.inside(location.getX(), prospectiveLocation1)) {
-			leftHit = true;
-		}
-		else {
-			length += SPEED;
-			location.setY(location.getY() - SPEED + getPush());
-		}
-		if(!map.inside(location.getX(), prospectiveLocation2)) {
-			rightHit = true;
-		}
-		else {
+		else if(topHit && !bottomHit) {
 			length += SPEED;
 		}
-		if(leftHit && rightHit) {
+		else if(bottomHit && !topHit) {
+			location.setY(location.getY() - SPEED);
+			length += SPEED;
+		}
+		if(topHit && bottomHit) {
 			if(!stopGrowing) {
 				dividerSplit();
 			}
@@ -63,27 +53,16 @@ public class VerticalDivider extends Divider {
 	@Override
 	protected void updateRect() {
 		this.boundingRect = new Rectangle(location.getX(), location.getY(), DIMS, length);
-
 	}
 	@Override
 	protected void dividerSplit() {
 		Polygon newPolygon = null;
-		if(map.inside(this.location.getX(), this.location.getY())){
-			newPolygon = map.split(this.location.getX(), this.location.getY() - SPEED, this.location.getX(), this.location.getY() + length, ball.getX(), ball.getY(), this, null);
-		}
-		else {
-			newPolygon = map.split(this.location.getX(), this.location.getY(), this.location.getX(), this.location.getY() + length + SPEED, ball.getX(), ball.getY(), this, null);
-		} 
+
+		newPolygon = map.split(this.location.getX(), this.location.getY(), this.location.getX(), this.location.getY() + length, this.ball.getX(), this.ball.getY(), this, null);
 		if(newPolygon != null) {
-			gm.newSplit(newPolygon);	
+			gm.newSplit(newPolygon);
 		}
-		gm.ready();
-		leftHit = false;
-		rightHit = false;
+		topHit = false;
+		bottomHit = false;
 	}
-
-	private int getPush() {
-		return map.getMinY(this.location.getX()) - 20;
-	}
-
 }

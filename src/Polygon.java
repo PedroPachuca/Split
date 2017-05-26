@@ -5,11 +5,9 @@ public class Polygon {
 
 	private ArrayList<Wall> walls = new ArrayList<Wall>();
 
-
 	public Polygon(){
 
 	}
-	
 	public int getMinX(int y){
 		int minX=1234567890;
 		for(Wall wall: walls){
@@ -57,15 +55,12 @@ public class Polygon {
 		}
 		return max-min;
 	}
-
 	public void add(Wall wall){
 		walls.add(wall);
 	}
-
 	public ArrayList<Wall> walls(){
 		return walls;
 	}
-
 	public boolean inside(int x, int y){
 		boolean up=false;
 		boolean down=false;
@@ -99,9 +94,7 @@ public class Polygon {
 		else{
 			return false;
 		}
-
 	}
-
 	public Polygon split(int x1,int y1,int x2,int y2, int ballX1, int ballX2, Divider d1, Divider d2){
 		Wall divider1 = null;
 		Wall divider2 = null;
@@ -125,7 +118,6 @@ public class Polygon {
 			else if(wall.inside(x2, y2)){
 				wall2=wall;
 			}
-
 		}
 		if(wall1==null||wall2==null){
 			return null;
@@ -217,14 +209,10 @@ public class Polygon {
 
 		}
 		else{
-
 		}
 		return null;
-
 	}
-
 	public void expand(){
-
 	}
 
 }
