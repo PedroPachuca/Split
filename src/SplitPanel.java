@@ -37,7 +37,7 @@ public class SplitPanel extends JPanel {
 	JTextField levelsField;
 	JTextField l;
 	private final int startingAreaAvailable;
-	private Image gameOverImage;
+	private Image gameOverImage, playAgainButton;
 	private JPanel buttonPanel;
 	private JPanel iAmDead;
 	private JButton horizontalDividerButton;
@@ -186,7 +186,7 @@ public class SplitPanel extends JPanel {
 
 		buttonPanel.add(horizontalDividerButton);
 		buttonPanel.add(verticalDividerButton);
-		buttonPanel.setBackground(Color.CYAN);
+		buttonPanel.setBackground(Color.WHITE);
 
 		this.add(buttonPanel, BorderLayout.SOUTH);
 	}
@@ -203,6 +203,11 @@ public class SplitPanel extends JPanel {
 		}
 		try {
 			gameOverImage = ImageIO.read(new File("src/THEBACKGROUND.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			playAgainButton = ImageIO.read(new File("src/playAgain.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -231,18 +236,33 @@ public class SplitPanel extends JPanel {
 			gm.draw(g);
 		}
 		else {
-			l = new JTextField();
-			l.setText("" + level);
-			buttonPanel.add(l);
 			buttonPanel.remove(horizontalDividerButton);
 			buttonPanel.remove(verticalDividerButton);
-			this.removeAll();
+			//this.removeAll();
 			g.drawImage(gameOverImage, 0, 0, dimensions.getX(), dimensions.getY(), null);
 			iAmDead = new JPanel();
-			buttonPanel.setLayout(new FlowLayout());
-			this.add(iAmDead, BorderLayout.SOUTH);
-			buttonPanel.setBackground(Color.CYAN);
-			//g.drawImage(gameOverImage, 0, 0, null);
+			iAmDead.setLayout(new FlowLayout());
+			
+			JButton playAgain = new JButton();
+			playAgain.setIcon(new ImageIcon(playAgainButton));
+
+			playAgain.addMouseListener(new MouseListener() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {}
+				@Override
+				public void mouseEntered(MouseEvent arg0) {}
+				@Override
+				public void mouseExited(MouseEvent arg0) {}
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+				}
+				@Override
+				public void mouseReleased(MouseEvent arg0) {}
+			});
+			buttonPanel.setBackground(Color.WHITE);
+			iAmDead.add(playAgain);
+			this.add(playAgain, BorderLayout.SOUTH);
+			//g.drawImage(gameOverImage, 0, 0, null);	
 		}
 	}
 }
