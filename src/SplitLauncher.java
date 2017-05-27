@@ -46,7 +46,7 @@ public class SplitLauncher {
 	}
 	private static int promptHeight() {
 		int height = 100;
-		String input = JOptionPane.showInputDialog("Enter 300 <= Width <= Screen Size over 300 or 0 for Full Screen");
+		String input = JOptionPane.showInputDialog("Enter 300 <= Height <= Screen Size over 300 or 0 for Full Screen");
 		try { 
 			height = Integer.parseInt(input);
 		}

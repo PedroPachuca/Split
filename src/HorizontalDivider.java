@@ -62,11 +62,10 @@ public class HorizontalDivider extends Divider {
 		Polygon newPolygon = null;
 
 		newPolygon = map.split(this.location.getX(), this.location.getY(), this.location.getX() + length, this.location.getY(), this.ball.getX(), this.ball.getY(), this, null);
-		if(newPolygon != null) {
-			gm.newSplit(newPolygon);
-			//gm.clearDividers();
-		}
 		leftHit = false;
 		rightHit = false;
+		if(newPolygon != null) {
+			gm.newSplit(newPolygon);
+		}
 	}
 }

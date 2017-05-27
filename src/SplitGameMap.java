@@ -13,6 +13,7 @@ public class SplitGameMap extends GameMap {
 	private boolean localReady = true;
 	private final int STARTWIDTH;
 	private final int STARTHEIGHT;
+	private boolean clearing = false;
 
 	public SplitGameMap(Vector dims) {
 		dimensions = dims;
@@ -50,6 +51,10 @@ public class SplitGameMap extends GameMap {
 		ball.move();
 		for (Wall w : polygon.walls()) {
 			w.collided(ball);
+		}
+		if(clearing) {
+			clearDividers();
+			clearing = false;
 		}
 		for (Divider div : dividers) {
 			div.grow();
@@ -100,7 +105,7 @@ public class SplitGameMap extends GameMap {
 	public void newSplit(Polygon newPolygon) {
 		localReady = true;
 		polygon = newPolygon;
-		//clearDividers();
+		clearing = true;
 		updateAllPolygons();
 	}
 	public boolean getGameOver() {
