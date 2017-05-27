@@ -16,9 +16,9 @@ public class SplitLauncher {
 	}
 	
 	private static void promptDims() {
-		int width = Integer.parseInt(JOptionPane.showInputDialog("Enter 300 <= Width <= Screen Size over 300 or 0 for Full Screen"));
+		int width = promptWidth();
 		if(width != 0) {
-			int height = Integer.parseInt(JOptionPane.showInputDialog("Enter 300 <= Height <= Screen Size or 0 for Full Screen"));
+			int height = promptHeight();
 			if(width >= 300 && height >= 300 && width <= dimensions.getX() && height <= dimensions.getY()) {
 				W = width;
 				H = height;
@@ -31,6 +31,29 @@ public class SplitLauncher {
 			W = dimensions.getX();
 			H = dimensions.getY();
 		}
+	}
+	
+	private static int promptWidth() {
+		int width = 100;
+		String input = JOptionPane.showInputDialog("Enter 300 <= Width <= Screen Size over 300 or 0 for Full Screen");
+		try { 
+			width = Integer.parseInt(input);
+		}
+		catch (NumberFormatException e) {
+		}
+		
+		return width;
+	}
+	private static int promptHeight() {
+		int height = 100;
+		String input = JOptionPane.showInputDialog("Enter 300 <= Width <= Screen Size over 300 or 0 for Full Screen");
+		try { 
+			height = Integer.parseInt(input);
+		}
+		catch (NumberFormatException e) {
+		}
+		
+		return height;
 	}
 
 	private void startGame() {
