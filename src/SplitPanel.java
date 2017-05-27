@@ -118,14 +118,13 @@ public class SplitPanel extends JPanel {
 		if (progressBar.getString().equals("100%")) {
 			areaAvailable = startingAreaAvailable / 100 * (50 + 5 * (level - 1));
 			progressBar.setMaximum(areaAvailable);
-			System.out.print(areaAvailable);
 			areaCutOff = 0;
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			gm = new SplitGameMap(dimensions);
+			gm.newExpansion(gm.getPolygon().expand());
 			level++;
 		}
 		if (gm.getPolygon() != null) {
@@ -133,7 +132,7 @@ public class SplitPanel extends JPanel {
 		}
 		progressBar.setValue(areaCutOff);
 		if (level % 3 == 0) {
-			gm = new SplitGameMap(dimensions);
+			gm.newExpansion(gm.getPolygon().expand());
 		}
 	}
 	private void beginGame() {

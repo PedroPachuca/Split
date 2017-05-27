@@ -108,6 +108,12 @@ public class SplitGameMap extends GameMap {
 		clearing = true;
 		updateAllPolygons();
 	}
+	
+	public void newExpansion(Polygon newExpanded) {
+		polygon = newExpanded;
+		updateAllPolygons();
+		//TODO FREEZE BALL
+	}
 	public boolean getGameOver() {
 		return gameOver;
 	}
