@@ -85,8 +85,6 @@ public class SplitGameMap extends GameMap {
 		int x = (int) (Math.random()*(dimensions.getX()-cushion*6-100))+cushion*3;
 		int y = (int) (Math.random()*(dimensions.getY()-150-cushion-cushion*3-100))+cushion*3;
 		ball = new Ball(x, y, ballRadius, polygon);
-		System.out.println("x = "+x);
-		System.out.println("y = "+y);
 	}
 	public void addDivider(Divider div) {
 		if (ready && localReady) {
@@ -112,7 +110,8 @@ public class SplitGameMap extends GameMap {
 	public void newExpansion(Polygon newExpanded) {
 		polygon = newExpanded;
 		updateAllPolygons();
-		//TODO FREEZE BALL
+		System.out.println(this.dimensions.getX() + " " +  this.dimensions.getY());
+		ball  = new Ball(this.dimensions.getX() / 2, this.dimensions.getY() / 2, ball.getSquareParams() * 2, polygon);
 	}
 	public boolean getGameOver() {
 		return gameOver;
