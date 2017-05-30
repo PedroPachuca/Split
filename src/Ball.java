@@ -1,10 +1,14 @@
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 
 public class Ball {
@@ -12,7 +16,7 @@ public class Ball {
 	private int x, y;
 	static int radius;
 	private int params;
-	private BufferedImage img;
+	private Image img;
 	private int a = getRandomXMovement();
 	private int b = getRandomYMovement();
 	private Rectangle boundingRect;
@@ -29,11 +33,9 @@ public class Ball {
 		boundingRect = new Rectangle(x, y, params, params);
 	}
 	private void getImg() {
-		try {
-			img = ImageIO.read(new File("src/ball.png"));
-		} catch (IOException e) {
-			System.out.println("Unable to instantiate image");
-		}
+		URL imageUrl = this.getClass().getResource("/ball.png");
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		img = tk.getImage(imageUrl);
 	}
 	public void setSpeed(int level) {
 		if (a > -7 && a < 7) {
