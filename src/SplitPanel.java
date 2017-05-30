@@ -11,10 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -27,8 +24,7 @@ public class SplitPanel extends JPanel {
 	final Vector dimensions;
 	SplitGameMap gm;
 	private Timer t;
-	BufferedImage img;
-	private BufferedImage vertical, horizontal;
+	Image horizontal, vertical, img, gameOverImage, playAgainButton;
 	private int level;
 	private int areaAvailable;
 	private JProgressBar progressBar;
@@ -37,7 +33,6 @@ public class SplitPanel extends JPanel {
 	JTextField levelsField;
 	JTextField l;
 	private final int startingAreaAvailable;
-	private Image gameOverImage, playAgainButton;
 	private JPanel buttonPanel;
 	private JPanel iAmDead;
 	private JButton horizontalDividerButton;
@@ -84,11 +79,9 @@ public class SplitPanel extends JPanel {
 		areaCutOff = 0;
 	}
 	private void openBackgroundImg() {
-		try {
-			img = ImageIO.read(new File("src/background.jpg"));
-		} catch (IOException e) {
-			System.out.println("Unable to instantiate background");
-		}
+		URL backUrl = this.getClass().getResource("background.jpg");
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		img = tk.getImage(backUrl);
 	}
 	private void setUpProgressBar(int width, int length) {
 		JPanel barPanel = new JPanel();
@@ -119,11 +112,12 @@ public class SplitPanel extends JPanel {
 			areaAvailable = startingAreaAvailable / 100 * (50 + 5 * (level - 1));
 			progressBar.setMaximum(areaAvailable);
 			areaCutOff = 0;
-			try {
+			/*try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
+			}*/ 
+			//i dont think we should pause stuff
 			gm.newExpansion(gm.getPolygon().expand());
 			level++;
 		}
@@ -190,26 +184,18 @@ public class SplitPanel extends JPanel {
 		this.add(buttonPanel, BorderLayout.SOUTH);
 	}
 	private void openImages() {
-		try {
-			horizontal = ImageIO.read(new File("src/hoirzontal.png"));
-		} catch (IOException e) {
-			System.out.println("Unable to instantiate horiozntal");
-		}
-		try {
-			vertical = ImageIO.read(new File("src/vertical.png"));
-		} catch (IOException e) {
-			System.out.println("Unable to instantiate vertical");
-		}
-		try {
-			gameOverImage = ImageIO.read(new File("src/THEBACKGROUND.jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			playAgainButton = ImageIO.read(new File("src/playAgain.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		URL horizontalUrl = this.getClass().getResource("hoirzontal.png");
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		horizontal = tk.getImage(horizontalUrl);
+
+		URL verticalUrl = this.getClass().getResource("vertical.png");
+		vertical = tk.getImage(verticalUrl);
+		
+		URL gameOverUrl = this.getClass().getResource("THEBACKGROUND.jpg");
+		gameOverImage = tk.getImage(gameOverUrl);
+		
+		URL playAgainUrl = this.getClass().getResource("playAgain.png");
+		playAgainButton = tk.getImage(playAgainUrl);
 	}
 	private void startTicks() {
 		t = new Timer(50, new ActionListener() {
@@ -241,7 +227,7 @@ public class SplitPanel extends JPanel {
 			g.drawImage(gameOverImage, 0, 0, dimensions.getX(), dimensions.getY(), null);
 			iAmDead = new JPanel();
 			iAmDead.setLayout(new FlowLayout());
-			
+
 			JButton playAgain = new JButton();
 			playAgain.setIcon(new ImageIcon(playAgainButton));
 
