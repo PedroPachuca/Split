@@ -28,6 +28,12 @@ public class SplitGameMap extends GameMap {
 	public int getStartHeight() {
 		return STARTHEIGHT;
 	}
+	public int getWidth() {
+		return dimensions.getX();
+	}
+	public int getHeight() {
+		return dimensions.getY();
+	}
 	private void createWalls() {
 		polygon.add(new Wall(cushion * 2, cushion * 2, cushion, dimensions.getY() - 150 - 2 * cushion));
 		polygon.add(new Wall(cushion * 2, dimensions.getY() - 150 - cushion, dimensions.getX() - 4 * cushion, cushion));

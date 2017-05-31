@@ -26,7 +26,7 @@ public class SplitPanel extends JPanel {
 	private Timer t;
 	Image horizontal, vertical, img, gameOverImage, playAgainButton;
 	private int level;
-	private int areaAvailable;
+	private int currentAreaAvailable;
 	private JProgressBar progressBar;
 	private int areaCutOff;
 	private String typeOfDivider = null;
@@ -47,11 +47,17 @@ public class SplitPanel extends JPanel {
 
 		this.addMouseListener(new MouseListener() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {}
+			public void mouseClicked(MouseEvent arg0) {
+			}
+
 			@Override
-			public void mouseEntered(MouseEvent arg0) {}
+			public void mouseEntered(MouseEvent arg0) {
+			}
+
 			@Override
-			public void mouseExited(MouseEvent arg0) {}
+			public void mouseExited(MouseEvent arg0) {
+			}
+
 			@Override
 			public void mousePressed(MouseEvent click) {
 				Divider div = null;
@@ -68,73 +74,87 @@ public class SplitPanel extends JPanel {
 					gm.addDivider(div);
 				}
 			}
+
 			@Override
-			public void mouseReleased(MouseEvent arg0) {}});
+			public void mouseReleased(MouseEvent arg0) {
+			}
+		});
 		level = 1;
 		beginGame();
 		startingAreaAvailable = gm.getPolygon().getHeight() * gm.getPolygon().getWidth();
-		areaAvailable = gm.getPolygon().getHeight() * gm.getPolygon().getWidth();
+		currentAreaAvailable = startingAreaAvailable;
 		progressBar = new JProgressBar();
 		setUpProgressBar(width, length);
 		areaCutOff = 0;
 	}
+
 	private void openBackgroundImg() {
 		URL backUrl = this.getClass().getResource("background.jpg");
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		img = tk.getImage(backUrl);
 	}
+
 	private void setUpProgressBar(int width, int length) {
 		JPanel barPanel = new JPanel();
 		barPanel.setLayout(new GridLayout());
+		barPanel.setBackground(Color.CYAN);
 		barPanel.setPreferredSize(new Dimension(100, 20));
 		progressBar.setMinimum(0);
-		progressBar.setMaximum(areaAvailable / 2);
+		progressBar.setMaximum(currentAreaAvailable / 2);
 		progressBar.setOpaque(true);
 		progressBar.setStringPainted(true);
 		progressBar.setBackground(Color.blue);
 		progressBar.setForeground(Color.GRAY);
 		progressBar.setVisible(true);
-		barPanel.add(createLevels());
+		progressBar.setPreferredSize(new Dimension(gm.getWidth() / 2, 20));
 		barPanel.add(progressBar);
+		barPanel.add(createLevels());
 		this.add(barPanel, BorderLayout.NORTH);
 		updateBar();
 	}
+
 	private Component createLevels() {
 		levelsField = new JTextField();
-		levelsField.setText("" + level);
+		levelsField.setText("Level: " + level);
+		levelsField.setPreferredSize(new Dimension(gm.getWidth() / 2, 20));
 		return levelsField;
 	}
+
 	private void updateLevels() {
-		levelsField.setText("" + level);
+		levelsField.setHorizontalAlignment(levelsField.CENTER);
+		levelsField.setText("Level: " + level);
 	}
+
 	public void updateBar() {
 		if (progressBar.getString().equals("100%")) {
-			areaAvailable = startingAreaAvailable / 100 * (50 + 5 * (level - 1));
-			progressBar.setMaximum(areaAvailable);
-			areaCutOff = 0;
-			/*try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}*/ 
-			//i dont think we should pause stuff
 			gm.newExpansion(gm.getPolygon().expand());
+			currentAreaAvailable = gm.getPolygon().getWidth() * gm.getPolygon().getHeight();
+			progressBar.setMaximum((currentAreaAvailable / 100) * (50 + (5 * (level - 1))));
+			System.out.println("width: " + gm.getPolygon().getWidth());
+			System.out.println("height: " + gm.getPolygon().getHeight());
+			System.out.println("currentArea: " + currentAreaAvailable);
+			System.out.println("max: " + progressBar.getMaximum());
+			areaCutOff = 0;
+			/*
+			 * try { Thread.sleep(1000); } catch (InterruptedException e) {
+			 * e.printStackTrace(); }
+			 */
+			// i dont think we should pause stuff
 			level++;
 		}
 		if (gm.getPolygon() != null) {
-			areaCutOff = areaAvailable - gm.getPolygon().getHeight() * gm.getPolygon().getWidth();
+			areaCutOff = currentAreaAvailable - gm.getPolygon().getHeight() * gm.getPolygon().getWidth();
 		}
 		progressBar.setValue(areaCutOff);
-		if (level % 3 == 0) {
-			gm.newExpansion(gm.getPolygon().expand());
-		}
 	}
+
 	private void beginGame() {
 		this.setPreferredSize(new Dimension(dimensions.getX(), dimensions.getY()));
 		createMap();
 		createDividerButtons();
 		startTicks();
 	}
+
 	private void createDividerButtons() {
 		openImages();
 
@@ -149,32 +169,48 @@ public class SplitPanel extends JPanel {
 
 		horizontalDividerButton.addMouseListener(new MouseListener() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {}
+			public void mouseClicked(MouseEvent arg0) {
+			}
+
 			@Override
-			public void mouseEntered(MouseEvent arg0) {}
+			public void mouseEntered(MouseEvent arg0) {
+			}
+
 			@Override
-			public void mouseExited(MouseEvent arg0) {}
+			public void mouseExited(MouseEvent arg0) {
+			}
+
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				typeOfDivider = "horizontal";
 			}
+
 			@Override
-			public void mouseReleased(MouseEvent arg0) {}
+			public void mouseReleased(MouseEvent arg0) {
+			}
 		});
 
 		verticalDividerButton.addMouseListener(new MouseListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {}
+			public void mouseClicked(MouseEvent e) {
+			}
+
 			@Override
-			public void mouseEntered(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {
+			}
+
 			@Override
-			public void mouseExited(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {
+			}
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				typeOfDivider = "vertical";
 			}
+
 			@Override
-			public void mouseReleased(MouseEvent e) {}
+			public void mouseReleased(MouseEvent e) {
+			}
 		});
 
 		buttonPanel.add(horizontalDividerButton);
@@ -183,6 +219,7 @@ public class SplitPanel extends JPanel {
 
 		this.add(buttonPanel, BorderLayout.SOUTH);
 	}
+
 	private void openImages() {
 		URL horizontalUrl = this.getClass().getResource("hoirzontal.png");
 		Toolkit tk = Toolkit.getDefaultToolkit();
@@ -190,13 +227,14 @@ public class SplitPanel extends JPanel {
 
 		URL verticalUrl = this.getClass().getResource("vertical.png");
 		vertical = tk.getImage(verticalUrl);
-		
+
 		URL gameOverUrl = this.getClass().getResource("THEBACKGROUND.jpg");
 		gameOverImage = tk.getImage(gameOverUrl);
-		
+
 		URL playAgainUrl = this.getClass().getResource("playAgain.png");
 		playAgainButton = tk.getImage(playAgainUrl);
 	}
+
 	private void startTicks() {
 		t = new Timer(50, new ActionListener() {
 			@Override
@@ -208,9 +246,11 @@ public class SplitPanel extends JPanel {
 		});
 		t.start();
 	}
+
 	private void createMap() {
 		gm = new SplitGameMap(dimensions);
 	}
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -219,11 +259,10 @@ public class SplitPanel extends JPanel {
 			updateBar();
 			g.drawImage(img, 0, 0, dimensions.getX(), dimensions.getY(), null);
 			gm.draw(g);
-		}
-		else {
+		} else {
 			buttonPanel.remove(horizontalDividerButton);
 			buttonPanel.remove(verticalDividerButton);
-			//this.removeAll();
+			// this.removeAll();
 			g.drawImage(gameOverImage, 0, 0, dimensions.getX(), dimensions.getY(), null);
 			iAmDead = new JPanel();
 			iAmDead.setLayout(new FlowLayout());
@@ -233,21 +272,29 @@ public class SplitPanel extends JPanel {
 
 			playAgain.addMouseListener(new MouseListener() {
 				@Override
-				public void mouseClicked(MouseEvent arg0) {}
+				public void mouseClicked(MouseEvent arg0) {
+				}
+
 				@Override
-				public void mouseEntered(MouseEvent arg0) {}
+				public void mouseEntered(MouseEvent arg0) {
+				}
+
 				@Override
-				public void mouseExited(MouseEvent arg0) {}
+				public void mouseExited(MouseEvent arg0) {
+				}
+
 				@Override
 				public void mousePressed(MouseEvent arg0) {
 				}
+
 				@Override
-				public void mouseReleased(MouseEvent arg0) {}
+				public void mouseReleased(MouseEvent arg0) {
+				}
 			});
 			buttonPanel.setBackground(Color.WHITE);
 			iAmDead.add(playAgain);
 			this.add(playAgain, BorderLayout.SOUTH);
-			//g.drawImage(gameOverImage, 0, 0, null);	
+			// g.drawImage(gameOverImage, 0, 0, null);
 		}
 	}
 }
